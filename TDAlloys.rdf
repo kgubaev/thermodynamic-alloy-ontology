@@ -9,7 +9,10 @@
      xmlns:qudt="http://qudt.org/schema/qudt/"
      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
      xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:swrla="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
      xmlns:terms="http://purl.org/dc/terms/">
     <owl:Ontology rdf:about="https://purls.helmholtz-metadaten.de/disos/cso">
         <terms:contributor>Said Fathalla</terms:contributor>
@@ -75,6 +78,12 @@
     <!-- http://qudt.org/schema/qudt/description -->
 
     <owl:AnnotationProperty rdf:about="http://qudt.org/schema/qudt/description"/>
+    
+
+
+    <!-- http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled -->
+
+    <owl:AnnotationProperty rdf:about="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
     
 
 
@@ -151,7 +160,27 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#containsPhase">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PhaseDiagram"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#containsPhase"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -160,6 +189,13 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasAtomisticSystem">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:domain>
     </owl:ObjectProperty>
     
 
@@ -168,6 +204,31 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:ObjectProperty>
     
 
@@ -176,6 +237,20 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasEnergyFunction">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#usesMethod"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#DataObtainingMethod"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -184,6 +259,31 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:ObjectProperty>
     
 
@@ -191,6 +291,13 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#hasInputGrid -->
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasInputGrid">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#usesMethod"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#DataObtainingMethod"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
     </owl:ObjectProperty>
     
@@ -199,6 +306,14 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#hasOutputProperty -->
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasOutputProperty">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#usesMethod"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#DataObtainingMethod"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:ObjectProperty>
     
@@ -208,7 +323,38 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -217,7 +363,27 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#includesPhase">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PhaseDiagram"/>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#containsPhase"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Phase"/>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasThermodynamicConditions"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -227,6 +393,36 @@
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#includesRange">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:range>
+        <rdfs:range>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:range>
     </owl:ObjectProperty>
     
 
@@ -241,6 +437,37 @@
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#parameterType">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:ObjectProperty>
     
@@ -249,6 +476,13 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#usesMethod -->
 
     <owl:ObjectProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#usesMethod">
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#usesMethod"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#DataObtainingMethod"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#DataObtainingMethod"/>
     </owl:ObjectProperty>
     
@@ -269,7 +503,92 @@
 
     <owl:DatatypeProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#endRange">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints -->
+
+    <owl:DatatypeProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
     </owl:DatatypeProperty>
     
 
@@ -278,6 +597,51 @@
 
     <owl:DatatypeProperty rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#startRange">
         <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:domain rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:domain>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:domain>
+        <rdfs:domain>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:domain>
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
     </owl:DatatypeProperty>
     
@@ -337,14 +701,6 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Anisotropic -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Anisotropic">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Pressure"/>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature">
@@ -360,6 +716,26 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -380,14 +756,6 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Concentration -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Concentration">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationInterval -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationInterval">
@@ -399,6 +767,29 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -406,6 +797,7 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationParameter -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationParameter">
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:Class>
     
@@ -426,29 +818,18 @@
             </owl:Class>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
     </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#ConstPressureHeatCapacity -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConstPressureHeatCapacity">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#ConstVolumeHeatCapacity -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConstVolumeHeatCapacity">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#ConstantTemperature -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConstantTemperature"/>
     
 
 
@@ -464,18 +845,35 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Deformation -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Deformation">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#ElevatedPressure -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ElevatedPressure">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FixedPressureTemp"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -484,14 +882,31 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ElevatedTemperature">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FixedPressureTemp"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Enthalpy -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Enthalpy">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ZeroDerivativeQuantity"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -527,22 +942,25 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Volume"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Pressure"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Temperature"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -556,21 +974,25 @@
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
-                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Pressure"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Temperature"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
-                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
-                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Volume"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -581,22 +1003,7 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ForceFieldParameter">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ComputationalParameter"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#GibbsEnergy -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#GibbsEnergy">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ZeroDerivativeQuantity"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#HelmholtzEnergy -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#HelmholtzEnergy">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ZeroDerivativeQuantity"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:Class>
     
 
@@ -605,14 +1012,7 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#InputStructureParameter">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ComputationalParameter"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#InternalEnergy -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#InternalEnergy">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ZeroDerivativeQuantity"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:Class>
     
 
@@ -621,6 +1021,29 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
@@ -639,18 +1062,11 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Isotropic -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Isotropic">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Pressure"/>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#JobExecutionParameter -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#JobExecutionParameter">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ComputationalParameter"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:Class>
     
 
@@ -659,6 +1075,31 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#NormalThermodynamicConditions">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FixedPressureTemp"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicConditions"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasDependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#hasIndependentProperty"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
         <rdfs:comment>Temperature of 293K and pressure of 1 atm</rdfs:comment>
     </owl:Class>
     
@@ -674,10 +1115,33 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange">
         <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
                 <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
                 <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
             </owl:Restriction>
         </rdfs:subClassOf>
     </owl:Class>
@@ -721,74 +1185,38 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#PointRange -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PointRange">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
-                        <owl:someValuesFrom>
-                            <rdfs:Datatype>
-                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-                                <owl:withRestrictions rdf:parseType="Collection">
-                                    <rdf:Description>
-                                        <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
-                                    </rdf:Description>
-                                </owl:withRestrictions>
-                            </rdfs:Datatype>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
-                        <owl:someValuesFrom>
-                            <rdfs:Datatype>
-                                <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
-                                <owl:withRestrictions rdf:parseType="Collection">
-                                    <rdf:Description>
-                                        <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
-                                    </rdf:Description>
-                                </owl:withRestrictions>
-                            </rdfs:Datatype>
-                        </owl:someValuesFrom>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Pressure -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Pressure">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#PressureConcentrationGrid -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureConcentrationGrid">
-        <owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdfs:subClassOf>
             <owl:Class>
                 <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConstantTemperature"/>
-                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
-                    <owl:Class>
-                        <owl:intersectionOf rdf:parseType="Collection">
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
-                                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
-                            </owl:Restriction>
-                            <owl:Restriction>
-                                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
-                                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
-                            </owl:Restriction>
-                        </owl:intersectionOf>
-                    </owl:Class>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
                 </owl:intersectionOf>
             </owl:Class>
-        </owl:equivalentClass>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -804,6 +1232,29 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -811,6 +1262,7 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter">
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:Class>
     
@@ -830,6 +1282,17 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -853,6 +1316,47 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -884,6 +1388,7 @@
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputParameter">
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ComputationalParameter"/>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
     </owl:Class>
     
 
@@ -906,14 +1411,6 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Temperature -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Temperature">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval">
@@ -925,6 +1422,29 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -932,6 +1452,7 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#TemperatureParameter -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureParameter">
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:Class>
     
@@ -951,14 +1472,17 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#ThermalExpansion -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ThermalExpansion">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#FirstDerivativeProperty"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -996,37 +1520,6 @@
     
 
 
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#Volume -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#Volume">
-        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SecondDerivativeProperty"/>
-    </owl:Class>
-    
-
-
-    <!-- https://purls.helmholtz-metadaten.de/disos/cso#VolumeConcentrationGrid -->
-
-    <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeConcentrationGrid">
-        <owl:equivalentClass>
-            <owl:Class>
-                <owl:intersectionOf rdf:parseType="Collection">
-                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConstantTemperature"/>
-                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
-                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
-                    </owl:Restriction>
-                    <owl:Restriction>
-                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
-                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
-                    </owl:Restriction>
-                </owl:intersectionOf>
-            </owl:Class>
-        </owl:equivalentClass>
-    </owl:Class>
-    
-
-
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#VolumeInterval -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeInterval">
@@ -1038,6 +1531,29 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1045,6 +1561,7 @@
     <!-- https://purls.helmholtz-metadaten.de/disos/cso#VolumeParameter -->
 
     <owl:Class rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeParameter">
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
         <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ThermodynamicParameter"/>
     </owl:Class>
     
@@ -1064,6 +1581,17 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1087,6 +1615,47 @@
                 </owl:intersectionOf>
             </owl:Class>
         </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
     </owl:Class>
     
 
@@ -1156,11 +1725,962 @@
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////
     //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- https://purls.helmholtz-metadaten.de/disos/cso#myPresInterval -->
+
+    <owl:NamedIndividual rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#myPresInterval">
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+        <cso:endRange rdf:datatype="http://www.w3.org/2001/XMLSchema#double">5.0</cso:endRange>
+        <cso:numberOfPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2</cso:numberOfPoints>
+        <cso:startRange rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.0</cso:startRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://purls.helmholtz-metadaten.de/disos/cso#myPresPoint -->
+
+    <owl:NamedIndividual rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#myPresPoint">
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PointRange"/>
+        <rdf:type rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdf:type>
+        <rdf:type>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdf:type>
+        <cso:endRange rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</cso:endRange>
+        <cso:numberOfPoints rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</cso:numberOfPoints>
+        <cso:startRange rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</cso:startRange>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
     // General axioms
     //
     ///////////////////////////////////////////////////////////////////////////////////////
      -->
 
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureTemperatureConcentrationGrid"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeTemperatureConcentrationGrid"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                        <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationInterval"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureInterval"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeInterval"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationParameter"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationParameter"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureParameter"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureParameter"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeParameter"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#VolumeRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ChangingTemperature"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#SimulationInputGrid"/>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ConcentrationRange"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#includesRange"/>
+                <owl:someValuesFrom rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PressureRange"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#ParameterRange"/>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Class>
+                <owl:intersectionOf rdf:parseType="Collection">
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#parameterType"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onClass rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#Parameter"/>
+                    </owl:Restriction>
+                    <owl:Restriction>
+                        <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                        <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                        <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+                    </owl:Restriction>
+                </owl:intersectionOf>
+            </owl:Class>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#endRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minInclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">2.0</xsd:minInclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:someValuesFrom>
+                    <rdfs:Datatype>
+                        <owl:onDatatype rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+                        <owl:withRestrictions rdf:parseType="Collection">
+                            <rdf:Description>
+                                <xsd:minExclusive rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3.0</xsd:minExclusive>
+                            </rdf:Description>
+                        </owl:withRestrictions>
+                    </rdfs:Datatype>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </owl:intersectionOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#startRange"/>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
     <rdf:Description>
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#AllDisjointClasses"/>
         <owl:members rdf:parseType="Collection">
@@ -1177,6 +2697,92 @@
             <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#TemperatureInterval"/>
             <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#VolumeInterval"/>
         </owl:members>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Rules
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#i">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description rdf:about="https://purls.helmholtz-metadaten.de/disos/cso#n">
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Variable"/>
+    </rdf:Description>
+    <rdf:Description>
+        <swrla:isRuleEnabled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</swrla:isRuleEnabled>
+        <rdfs:comment></rdfs:comment>
+        <rdfs:label>PointRule</rdfs:label>
+        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#Imp"/>
+        <swrl:body>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#IntervalRange"/>
+                        <swrl:argument1 rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#i"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                        <rdf:first>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom"/>
+                                <swrl:propertyPredicate rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#numberOfPoints"/>
+                                <swrl:argument1 rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#i"/>
+                                <swrl:argument2 rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#n"/>
+                            </rdf:Description>
+                        </rdf:first>
+                        <rdf:rest>
+                            <rdf:Description>
+                                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                                <rdf:first>
+                                    <rdf:Description>
+                                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#BuiltinAtom"/>
+                                        <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#equal"/>
+                                        <swrl:arguments>
+                                            <rdf:Description>
+                                                <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                <rdf:first rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#n"/>
+                                                <rdf:rest>
+                                                    <rdf:Description>
+                                                        <rdf:type rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#List"/>
+                                                        <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</rdf:first>
+                                                        <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                                    </rdf:Description>
+                                                </rdf:rest>
+                                            </rdf:Description>
+                                        </swrl:arguments>
+                                    </rdf:Description>
+                                </rdf:first>
+                                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                            </rdf:Description>
+                        </rdf:rest>
+                    </rdf:Description>
+                </rdf:rest>
+            </rdf:Description>
+        </swrl:body>
+        <swrl:head>
+            <rdf:Description>
+                <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#AtomList"/>
+                <rdf:first>
+                    <rdf:Description>
+                        <rdf:type rdf:resource="http://www.w3.org/2003/11/swrl#ClassAtom"/>
+                        <swrl:classPredicate rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#PointRange"/>
+                        <swrl:argument1 rdf:resource="https://purls.helmholtz-metadaten.de/disos/cso#i"/>
+                    </rdf:Description>
+                </rdf:first>
+                <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+        </swrl:head>
     </rdf:Description>
 </rdf:RDF>
 
