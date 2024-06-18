@@ -8,4 +8,5 @@ Exemplary CQ:
 Is there any simulation result showing material property X in conditions Y? Where:
 
 X = {density}
+
 Z = {Pressure = 0 atm, Temperature = 300 Kelvin, Deformation=none}  
