@@ -10,3 +10,8 @@ Is there any simulation result showing material property X in conditions Y? Wher
 X = {density}
 
 Z = {Pressure = 0 atm, Temperature = 300 Kelvin, Deformation=none}  
+
+Answer is: the simulations of quality V conditions Z for which:
+1) it exist a known formula connecting V <---> X
+  and
+2) conditions Z have non-empty intersection with Y
