@@ -827,7 +827,7 @@ Note: It is recommended to report the value in GPa rounded to the nearest 0.1 GP
 
 Examples:
  -  hardnesses of an ordered list of metals
- -  moments of time of when some process had stopped, e.g,, times when heat oven reached 1000K temperature, provided for different repetitions of this process.
+ -  moments of time of when some process had stopped, e.g., times when heat oven reached 1000K temperature, provided for different repetitions of this process.
 
 Since \"measurable quantity\" can be both occurent and continuant, ParametricDimension has an entity class as its parameter.
 
@@ -859,7 +859,8 @@ Non-examples (enlisted, but not ascending/descending):
 :ParametricSpace rdf:type owl:Class ;
                  owl:equivalentClass [ rdf:type owl:Restriction ;
                                        owl:onProperty :hasDimension ;
-                                       owl:someValuesFrom :ParametricDimension
+                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                       owl:onClass :ParametricDimension
                                      ] ;
                  rdfs:subClassOf :SimulationEntitty ;
                  <http://www.w3.org/2004/02/skos/core#definition> """Simulation entity representing a space, which dimensions are parametric dimensions.
