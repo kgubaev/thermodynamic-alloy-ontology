@@ -15,6 +15,45 @@
 #    Object Properties
 #################################################################
 
+###  http://www.thermodynamic-alloy-ontology.org#SimulatedCharacteristicOf
+:SimulatedCharacteristicOf rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
+                           owl:inverseOf :hasSimulatedCharacteristic .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#SimulatedDispositionOf
+:SimulatedDispositionOf rdf:type owl:ObjectProperty ;
+                        rdfs:subPropertyOf :SimulatedCharacteristicOf ;
+                        owl:inverseOf :hasSimulatedDisposition .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#SimulatedQualityOf
+:SimulatedQualityOf rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf :SimulatedCharacteristicOf ;
+                    owl:inverseOf :hasSimulatedQuality .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedCharacteristic
+:hasSimulatedCharacteristic rdf:type owl:ObjectProperty ;
+                            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                            <http://purl.obolibrary.org/obo/IAO_0000118> "SimulatedBearerOf" .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedDisposition
+:hasSimulatedDisposition rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf :hasSimulatedCharacteristic .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedQuality
+:hasSimulatedQuality rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf :hasSimulatedCharacteristic .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedRealisation
+:hasSimulatedRealisation rdf:type owl:ObjectProperty ;
+                         rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> .
+
+
 ###  https://w3id.org/pmd/co/hasDimension
 <https://w3id.org/pmd/co/hasDimension> rdf:type owl:ObjectProperty .
 
@@ -457,6 +496,12 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                     <http://www.w3.org/2004/02/skos/core#definition> "Measurement datum, which is the specified output of some simulation process" .
 
 
+###  https://w3id.org/pmd/co/SimulatedBulkModulus
+<https://w3id.org/pmd/co/SimulatedBulkModulus> rdf:type owl:Class ;
+                                               rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                               rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
 ###  https://w3id.org/pmd/co/SimulatedDisposition
 <https://w3id.org/pmd/co/SimulatedDisposition> rdf:type owl:Class ;
                                                owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -533,6 +578,18 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                            rdfs:comment "SimulationEntity denoting Quality" .
 
 
+###  https://w3id.org/pmd/co/SimulatedShearModulus
+<https://w3id.org/pmd/co/SimulatedShearModulus> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                                rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
+###  https://w3id.org/pmd/co/SimulatedYoungModulus
+<https://w3id.org/pmd/co/SimulatedYoungModulus> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                                rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
 ###  https://w3id.org/pmd/co/SimulationEntitty
 <https://w3id.org/pmd/co/SimulationEntitty> rdf:type owl:Class ;
                                             owl:equivalentClass [ rdf:type owl:Restriction ;
@@ -566,24 +623,6 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
                                                              ] ;
                                              <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over temperature" .
-
-
-###  https://w3id.org/pmd/co/TheoreticalBulkModulus
-<https://w3id.org/pmd/co/TheoreticalBulkModulus> rdf:type owl:Class ;
-                                                 rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
-                                                 rdfs:comment "Added Theoretical not to mix with real physical property" .
-
-
-###  https://w3id.org/pmd/co/TheoreticalShearModulus
-<https://w3id.org/pmd/co/TheoreticalShearModulus> rdf:type owl:Class ;
-                                                  rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
-                                                  rdfs:comment "Added Theoretical not to mix with real physical property" .
-
-
-###  https://w3id.org/pmd/co/TheoreticalYoungModulus
-<https://w3id.org/pmd/co/TheoreticalYoungModulus> rdf:type owl:Class ;
-                                                  rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
-                                                  rdfs:comment "Added Theoretical not to mix with real physical property" .
 
 
 ###  https://w3id.org/pmd/co/ThermalExpansion
@@ -852,45 +891,50 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                      <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
 
 
-###  https://w3id.org/pmd/co/SimulatedBulkModulus
-<https://w3id.org/pmd/co/SimulatedBulkModulus> rdf:type owl:NamedIndividual ,
-                                                        <https://w3id.org/pmd/co/TheoreticalBulkModulus> .
+###  https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample
+<https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample> rdf:type owl:NamedIndividual ,
+                                                                     <https://w3id.org/pmd/co/SimulatedBulkModulus> .
 
 
-###  https://w3id.org/pmd/co/SimulatedEquilibriumVolume
-<https://w3id.org/pmd/co/SimulatedEquilibriumVolume> rdf:type owl:NamedIndividual ,
-                                                              <https://w3id.org/pmd/co/EquilibriumAtomicVolume> .
+###  https://w3id.org/pmd/co/SimulatedEquilibriumVolume_of_Nb-sample
+<https://w3id.org/pmd/co/SimulatedEquilibriumVolume_of_Nb-sample> rdf:type owl:NamedIndividual ,
+                                                                           <https://w3id.org/pmd/co/EquilibriumAtomicVolume> .
 
 
-###  https://w3id.org/pmd/co/SimulatedFreeEnergy
-<https://w3id.org/pmd/co/SimulatedFreeEnergy> rdf:type owl:NamedIndividual ,
-                                                       <https://w3id.org/pmd/co/HelmholtzFreeEneergy> .
+###  https://w3id.org/pmd/co/SimulatedFreeEnergy_of_Nb-sample
+<https://w3id.org/pmd/co/SimulatedFreeEnergy_of_Nb-sample> rdf:type owl:NamedIndividual ,
+                                                                    <https://w3id.org/pmd/co/HelmholtzFreeEneergy> .
 
 
 ###  https://w3id.org/pmd/co/SimulatedObject_Nb-sample
 <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> rdf:type owl:NamedIndividual ,
-                                                             <https://w3id.org/pmd/co/SimulatedObject> .
+                                                             <https://w3id.org/pmd/co/SimulatedObject> ;
+                                                    :hasSimulatedDisposition <https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample> ,
+                                                                             <https://w3id.org/pmd/co/SimulatedEquilibriumVolume_of_Nb-sample> ,
+                                                                             <https://w3id.org/pmd/co/SimulatedFreeEnergy_of_Nb-sample> ;
+                                                    :hasSimulatedQuality <https://w3id.org/pmd/co/PressureParameter> ,
+                                                                         <https://w3id.org/pmd/co/TemperatureParameter> .
 
 
 ###  https://w3id.org/pmd/co/SimulationPlan_ElasticTest
 <https://w3id.org/pmd/co/SimulationPlan_ElasticTest> rdf:type owl:NamedIndividual ,
                                                               <https://w3id.org/pmd/co/SimulationPlan> ;
                                                      <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_ElasticTest> ;
-                                                     <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedBulkModulus> .
+                                                     <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample> .
 
 
 ###  https://w3id.org/pmd/co/SimulationPlan_EnergyTest
 <https://w3id.org/pmd/co/SimulationPlan_EnergyTest> rdf:type owl:NamedIndividual ,
                                                              <https://w3id.org/pmd/co/SimulationPlan> ;
                                                     <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_EnergyTest> ;
-                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedFreeEnergy> .
+                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedFreeEnergy_of_Nb-sample> .
 
 
 ###  https://w3id.org/pmd/co/SimulationPlan_VolumeTest
 <https://w3id.org/pmd/co/SimulationPlan_VolumeTest> rdf:type owl:NamedIndividual ,
                                                              <https://w3id.org/pmd/co/SimulationPlan> ;
                                                     <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_VolumeTest> ;
-                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedEquilibriumVolume> .
+                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedEquilibriumVolume_of_Nb-sample> .
 
 
 ###  https://w3id.org/pmd/co/SimulationProcess_ElasticTest0
