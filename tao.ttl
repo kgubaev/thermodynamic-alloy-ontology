@@ -1,0 +1,1087 @@
+@prefix : <http://www.thermodynamic-alloy-ontology.org/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.thermodynamic-alloy-ontology.org/> .
+
+<http://www.thermodynamic-alloy-ontology.org> rdf:type owl:Ontology ;
+                                               owl:imports <https://w3id.org/pmd/co/3.0.0/datatransformation> ,
+                                                           <urn:absolute:obi-reduced> ,
+                                                           <urn:absolute:stato-reduced> .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  https://w3id.org/pmd/co/hasDimension
+<https://w3id.org/pmd/co/hasDimension> rdf:type owl:ObjectProperty .
+
+
+###  https://w3id.org/pmd/co/hasInputParameterSpace
+<https://w3id.org/pmd/co/hasInputParameterSpace> rdf:type owl:ObjectProperty .
+
+
+###  https://w3id.org/pmd/co/hasLowerBoundary
+<https://w3id.org/pmd/co/hasLowerBoundary> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <https://w3id.org/pmd/co/hasPoint> ;
+                                           owl:inverseOf <https://w3id.org/pmd/co/isLowerBoundaryOf> .
+
+
+###  https://w3id.org/pmd/co/hasOutputDisposition
+<https://w3id.org/pmd/co/hasOutputDisposition> rdf:type owl:ObjectProperty ;
+                                               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                                               rdfs:domain <https://w3id.org/pmd/co/SimulationPlan> ;
+                                               rdfs:range <https://w3id.org/pmd/co/SimulatedPhysicalDisposition> ;
+                                               <http://www.w3.org/2004/02/skos/core#definition> "Property used to relate the SimulationPlanSpecification to the output of the corresponding SimulationProcess, realized by this plan." .
+
+
+###  https://w3id.org/pmd/co/hasParameter
+<https://w3id.org/pmd/co/hasParameter> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                                       rdfs:domain <https://w3id.org/pmd/co/ParametricDimension> ;
+                                       rdfs:range <https://w3id.org/pmd/co/SimulatedQuality> ;
+                                       <http://www.w3.org/2004/02/skos/core#definition> "Relation between ParametricDimension and which SimulatedQuality, which tells that the points on this dimension axis are measured values of this quality." .
+
+
+###  https://w3id.org/pmd/co/hasPoint
+<https://w3id.org/pmd/co/hasPoint> rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf owl:topObjectProperty ;
+                                   owl:inverseOf <https://w3id.org/pmd/co/isPointOf> .
+
+
+###  https://w3id.org/pmd/co/hasSimulatedMaterial
+<https://w3id.org/pmd/co/hasSimulatedMaterial> rdf:type owl:ObjectProperty ;
+                                               rdfs:range <https://w3id.org/pmd/co/SimulatedMaterial> .
+
+
+###  https://w3id.org/pmd/co/hasUpperBoundary
+<https://w3id.org/pmd/co/hasUpperBoundary> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <https://w3id.org/pmd/co/hasPoint> ;
+                                           owl:inverseOf <https://w3id.org/pmd/co/isUpperBoundaryOf> .
+
+
+###  https://w3id.org/pmd/co/isDerivativeOfEnergyBy
+<https://w3id.org/pmd/co/isDerivativeOfEnergyBy> rdf:type owl:ObjectProperty .
+
+
+###  https://w3id.org/pmd/co/isLowerBoundaryOf
+<https://w3id.org/pmd/co/isLowerBoundaryOf> rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf <https://w3id.org/pmd/co/isPointOf> .
+
+
+###  https://w3id.org/pmd/co/isPointOf
+<https://w3id.org/pmd/co/isPointOf> rdf:type owl:ObjectProperty ;
+                                    rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  https://w3id.org/pmd/co/isUpperBoundaryOf
+<https://w3id.org/pmd/co/isUpperBoundaryOf> rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf <https://w3id.org/pmd/co/isPointOf> .
+
+
+###  https://w3id.org/pmd/co/providesSimulationNumber
+<https://w3id.org/pmd/co/providesSimulationNumber> rdf:type owl:ObjectProperty ;
+                                                   rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                                                   rdfs:domain <https://w3id.org/pmd/co/SimulationPlan> ;
+                                                   rdfs:range <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                   <http://www.w3.org/2004/02/skos/core#definition> "Property used to relate the SimulationPlanSpecification to number of the corresponding SimulationProcess, realized by this plan." .
+
+
+###  https://w3id.org/pmd/co/providesValueFor
+<https://w3id.org/pmd/co/providesValueFor> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                                           rdfs:domain <https://w3id.org/pmd/co/SimulationPlan> ;
+                                           rdfs:range <https://w3id.org/pmd/co/SimulatedPhysicalQuality> ;
+                                           <http://www.w3.org/2004/02/skos/core#definition> "Property used to relate the SimulationPlanSpecification to the input of the corresponding SimulationProcess, realized by this plan." .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  https://w3id.org/pmd/co/hasNumberOfPoints
+<https://w3id.org/pmd/co/hasNumberOfPoints> rdf:type owl:DatatypeProperty ;
+                                            rdfs:domain <https://w3id.org/pmd/co/ParametricDimension> ;
+                                            rdfs:range xsd:integer ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "A data property which tells how many points the ParametricDimension has" .
+
+
+###  https://w3id.org/pmd/co/hasSimulationNumber
+<https://w3id.org/pmd/co/hasSimulationNumber> rdf:type owl:DatatypeProperty ;
+                                              rdfs:subPropertyOf owl:topDataProperty ;
+                                              rdfs:domain <https://w3id.org/pmd/co/SimulationProcess> ;
+                                              rdfs:range xsd:integer ;
+                                              <http://www.w3.org/2004/02/skos/core#definition> "A data property that tells the number of the SimulationProcess inside the SimulationPlanSpecification. It is used to link the certain process instance with the corresponding values of input and output." .
+
+
+###  https://w3id.org/pmd/co/isDerivativeOfEnergyOrder
+<https://w3id.org/pmd/co/isDerivativeOfEnergyOrder> rdf:type owl:DatatypeProperty ;
+                                                    rdfs:range [ rdf:type rdfs:Datatype ;
+                                                                 owl:oneOf [ rdf:type rdf:List ;
+                                                                             rdf:first 0 ;
+                                                                             rdf:rest [ rdf:type rdf:List ;
+                                                                                        rdf:first 1 ;
+                                                                                        rdf:rest [ rdf:type rdf:List ;
+                                                                                                   rdf:first 2 ;
+                                                                                                   rdf:rest rdf:nil
+                                                                                                 ]
+                                                                                      ]
+                                                                           ]
+                                                               ] ;
+                                                    rdfs:comment "Relation of the corresponding physical property to one of the thermodynamic free energy values" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.thermodynamic-alloy-ontology.org#Binary
+:Binary rdf:type owl:Class ;
+        rdfs:subClassOf <https://w3id.org/pmd/co/CMSOMaterial> .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#CMSOStructureType
+:CMSOStructureType rdf:type owl:Class .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#CrystalNonPeriodic
+:CrystalNonPeriodic rdf:type owl:Class ;
+                    rdfs:subClassOf :CMSOStructureType .
+
+
+###  http://www.thermodynamic-alloy-ontology.org#SimulatedObject
+:SimulatedObject rdf:type owl:Class ;
+                 rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> .
+
+
+###  https://w3id.org/pmd/co/AdiabaticCompressibility
+<https://w3id.org/pmd/co/AdiabaticCompressibility> rdf:type owl:Class ;
+                                                   rdfs:subClassOf <https://w3id.org/pmd/co/Compressibility> ;
+                                                   <http://www.w3.org/2004/02/skos/core#definition> "Compressibility at constant enthropy (fast)" .
+
+
+###  https://w3id.org/pmd/co/CMSOMaterial
+<https://w3id.org/pmd/co/CMSOMaterial> rdf:type owl:Class .
+
+
+###  https://w3id.org/pmd/co/ChemicalPotential
+<https://w3id.org/pmd/co/ChemicalPotential> rdf:type owl:Class ;
+                                            rdfs:subClassOf <https://w3id.org/pmd/co/CompositionRelated> ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "Disposition telling energy quantity pair particle or per concentration unit" .
+
+
+###  https://w3id.org/pmd/co/CompositionRelated
+<https://w3id.org/pmd/co/CompositionRelated> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                               owl:hasValue <https://w3id.org/pmd/co/ConcentrationParameter>
+                                                             ] ;
+                                             <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over concentration" .
+
+
+###  https://w3id.org/pmd/co/Compressibility
+<https://w3id.org/pmd/co/Compressibility> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                            owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                          ] ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "Second derivative of free energy over pressure" .
+
+
+###  https://w3id.org/pmd/co/ConcentrationDimension
+<https://w3id.org/pmd/co/ConcentrationDimension> rdf:type owl:Class ;
+                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                       owl:hasValue <https://w3id.org/pmd/co/ConcentrationParameter>
+                                                                     ] ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
+
+
+###  https://w3id.org/pmd/co/ConstantPressureHeatCapacity
+<https://w3id.org/pmd/co/ConstantPressureHeatCapacity> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedHeatCapacity> .
+
+
+###  https://w3id.org/pmd/co/ConstantVolumeHeatCapacity
+<https://w3id.org/pmd/co/ConstantVolumeHeatCapacity> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedHeatCapacity> .
+
+
+###  https://w3id.org/pmd/co/CrystalPeriodic
+<https://w3id.org/pmd/co/CrystalPeriodic> rdf:type owl:Class ;
+                                          owl:equivalentClass [ rdf:type owl:Class ;
+                                                                owl:oneOf ( <https://w3id.org/pmd/co/bccStructure>
+                                                                            <https://w3id.org/pmd/co/fccStructure>
+                                                                            <https://w3id.org/pmd/co/scStructure>
+                                                                          )
+                                                              ] ;
+                                          rdfs:subClassOf :CMSOStructureType .
+
+
+###  https://w3id.org/pmd/co/Enthalpy
+<https://w3id.org/pmd/co/Enthalpy> rdf:type owl:Class ;
+                                   rdfs:subClassOf <https://w3id.org/pmd/co/PhaseRegion> .
+
+
+###  https://w3id.org/pmd/co/EquilibriumAtomicVolume
+<https://w3id.org/pmd/co/EquilibriumAtomicVolume> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/VolumeRelated> ;
+                                                  <http://www.w3.org/2004/02/skos/core#definition> "A Physical Disposition specifying zero derivative of one of the energies over volume  at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space" .
+
+
+###  https://w3id.org/pmd/co/EquilibriumDensity
+<https://w3id.org/pmd/co/EquilibriumDensity> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://w3id.org/pmd/co/VolumeRelated> ;
+                                             <http://www.w3.org/2004/02/skos/core#definition> "Proportional to inverse equilibrium volume" .
+
+
+###  https://w3id.org/pmd/co/EquilibriumLatticeConstant
+<https://w3id.org/pmd/co/EquilibriumLatticeConstant> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <https://w3id.org/pmd/co/VolumeRelated> ;
+                                                     <http://www.w3.org/2004/02/skos/core#definition> "A Physical Disposition specifying zero derivative of one of the energies over the lattice constant of some material at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space" .
+
+
+###  https://w3id.org/pmd/co/EquilibriumPressure
+<https://w3id.org/pmd/co/EquilibriumPressure> rdf:type owl:Class ;
+                                              rdfs:subClassOf <https://w3id.org/pmd/co/PressureRelated> ;
+                                              <http://www.w3.org/2004/02/skos/core#definition> "A Physical Disposition specifying zero derivative of one of the energies over pressure at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space" .
+
+
+###  https://w3id.org/pmd/co/EquilibriumTemperature
+<https://w3id.org/pmd/co/EquilibriumTemperature> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/TemperatureRelated> ;
+                                                 <http://www.w3.org/2004/02/skos/core#definition> "A Physical Disposition specifying zero derivative of one of the energies over temperature at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space" .
+
+
+###  https://w3id.org/pmd/co/FirstDerivativeOfEnergy
+<https://w3id.org/pmd/co/FirstDerivativeOfEnergy> rdf:type owl:Class ;
+                                                  owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyOrder> ;
+                                                                        owl:hasValue 1
+                                                                      ] ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedPhysicalDisposition> ;
+                                                  <http://www.w3.org/2004/02/skos/core#definition> "A Physical Disposition specifying the first derivative of one of the energies at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space." .
+
+
+###  https://w3id.org/pmd/co/FormationEnergy
+<https://w3id.org/pmd/co/FormationEnergy> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/PhaseDifference> ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "Subclass of PhaseDifference which specifies the energy difference between some phase and its constituting phases" .
+
+
+###  https://w3id.org/pmd/co/GibbsFreeEnergy
+<https://w3id.org/pmd/co/GibbsFreeEnergy> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/PhaseRegion> .
+
+
+###  https://w3id.org/pmd/co/HelmholtzFreeEneergy
+<https://w3id.org/pmd/co/HelmholtzFreeEneergy> rdf:type owl:Class ;
+                                               rdfs:subClassOf <https://w3id.org/pmd/co/PhaseRegion> .
+
+
+###  https://w3id.org/pmd/co/InternalEnergy
+<https://w3id.org/pmd/co/InternalEnergy> rdf:type owl:Class ;
+                                         rdfs:subClassOf <https://w3id.org/pmd/co/PhaseRegion> .
+
+
+###  https://w3id.org/pmd/co/IsothermalCompressibility
+<https://w3id.org/pmd/co/IsothermalCompressibility> rdf:type owl:Class ;
+                                                    rdfs:subClassOf <https://w3id.org/pmd/co/Compressibility> ;
+                                                    <http://www.w3.org/2004/02/skos/core#definition> "Compressibility at constant temperature (slow)" .
+
+
+###  https://w3id.org/pmd/co/LinearElastisityModulus
+<https://w3id.org/pmd/co/LinearElastisityModulus> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
+                                                                  [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                                    owl:hasValue <https://w3id.org/pmd/co/VolumeParameter>
+                                                                  ] ;
+                                                  <http://www.w3.org/2004/02/skos/core#definition> "Second derivative of energy over volume or some linear deformation(s)" .
+
+
+###  https://w3id.org/pmd/co/NonCrystal
+<https://w3id.org/pmd/co/NonCrystal> rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Class ;
+                                                           owl:oneOf ( <https://w3id.org/pmd/co/amorphousStructure>
+                                                                       <https://w3id.org/pmd/co/liquidStructure>
+                                                                     )
+                                                         ] ;
+                                     rdfs:subClassOf :CMSOStructureType .
+
+
+###  https://w3id.org/pmd/co/ParametricDimension
+<https://w3id.org/pmd/co/ParametricDimension> rdf:type owl:Class ;
+                                              owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                    owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                    owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000001>
+                                                                  ] ;
+                                              rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                              rdfs:comment "Integer or float values is fine. Should we include categorical dimensions here? E.g., cold, warm, hot dimension?" ;
+                                              <http://www.w3.org/2004/02/skos/core#definition> """Simulation entity which denotes an enlisted range of values of an arbitrary measurable quantity (parameter) put on some axis in ascending or descending order with certain scale. 
+
+Examples:
+ -  hardnesses of an ordered list of metals
+ -  moments of time of when some process had stopped, e.g., times when heat oven reached 1000K temperature, provided for different repetitions of this process.
+
+Since \"measurable quantity\" can be both occurent and continuant, ParametricDimension has an entity class as its parameter.
+
+Non-examples (enlisted, but not ascending/descending):
+ - a set of social roles a person can have in a different set of situations
+ - a set of processes occuring at different stages of embrion growth
+ - a set of 1-D, 2-D or 3-D spacial regions, denoting the defects, induced by some impact. E.g., we hit a car door with a bullet at different speeds/angles and see the result.""" .
+
+
+###  https://w3id.org/pmd/co/ParametricInterval
+<https://w3id.org/pmd/co/ParametricInterval> rdf:type owl:Class ;
+                                             owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <https://w3id.org/pmd/co/hasLowerBoundary> ;
+                                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                          owl:onClass <http://purl.obolibrary.org/obo/OBI_0001931>
+                                                                                        ]
+                                                                                        [ rdf:type owl:Restriction ;
+                                                                                          owl:onProperty <https://w3id.org/pmd/co/hasUpperBoundary> ;
+                                                                                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                          owl:onClass <http://purl.obolibrary.org/obo/OBI_0001931>
+                                                                                        ]
+                                                                                      ) ;
+                                                                   rdf:type owl:Class
+                                                                 ] ;
+                                             rdfs:subClassOf <https://w3id.org/pmd/co/ParametricDimension> .
+
+
+###  https://w3id.org/pmd/co/ParametricSpace
+<https://w3id.org/pmd/co/ParametricSpace> rdf:type owl:Class ;
+                                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <https://w3id.org/pmd/co/hasDimension> ;
+                                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                owl:onClass <https://w3id.org/pmd/co/ParametricDimension>
+                                                              ] ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> """Simulation entity representing a space, which dimensions are parametric dimensions.
+ E.g., pressure-volume space of a phase diagram, red-green-blue space of color representation, valence-arousal emotional space""" .
+
+
+###  https://w3id.org/pmd/co/PhaseBoundary
+<https://w3id.org/pmd/co/PhaseBoundary> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/pmd/co/PhaseDifference> ;
+                                        <http://www.w3.org/2004/02/skos/core#definition> "Subclass of PhaseDifference which specifies exactly zero value of energy difference in some region of thermodynamic (Pressure,Temperature,Volume,Concentration) space." .
+
+
+###  https://w3id.org/pmd/co/PhaseDifference
+<https://w3id.org/pmd/co/PhaseDifference> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/ZeroDerivativeOfEnergy> ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "Disposition which specifies value(s) of the energy difference between two phases in some region of thermodynamic (Pressure,Temperature,Volume,Concentration) space." .
+
+
+###  https://w3id.org/pmd/co/PhaseRegion
+<https://w3id.org/pmd/co/PhaseRegion> rdf:type owl:Class ;
+                                      rdfs:subClassOf <https://w3id.org/pmd/co/ZeroDerivativeOfEnergy> ;
+                                      <http://www.w3.org/2004/02/skos/core#definition> "Disposition which specifies value(s) of one of the energies in some region of thermodynamic (Pressure,Temperature,Volume,Concentration) space." .
+
+
+###  https://w3id.org/pmd/co/PhaseTransitionPressure
+<https://w3id.org/pmd/co/PhaseTransitionPressure> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/PhaseBoundary> .
+
+
+###  https://w3id.org/pmd/co/PhaseTransitionTemperature
+<https://w3id.org/pmd/co/PhaseTransitionTemperature> rdf:type owl:Class ;
+                                                     rdfs:subClassOf <https://w3id.org/pmd/co/PhaseBoundary> .
+
+
+###  https://w3id.org/pmd/co/PhaseTransitionVolume
+<https://w3id.org/pmd/co/PhaseTransitionVolume> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://w3id.org/pmd/co/PhaseBoundary> .
+
+
+###  https://w3id.org/pmd/co/PhysicalSimulationProcess
+<https://w3id.org/pmd/co/PhysicalSimulationProcess> rdf:type owl:Class ;
+                                                    owl:equivalentClass [ owl:intersectionOf ( <http://purl.obolibrary.org/obo/OBI_0000011>
+                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                 owl:onProperty <http://purl.obolibrary.org/obo/OBI_0000293> ;
+                                                                                                 owl:someValuesFrom <https://w3id.org/pmd/co/SimulatedPhysicalQuality>
+                                                                                               ]
+                                                                                               [ rdf:type owl:Restriction ;
+                                                                                                 owl:onProperty <http://purl.obolibrary.org/obo/OBI_0000299> ;
+                                                                                                 owl:someValuesFrom <https://w3id.org/pmd/co/SimulatedPhysicalDisposition>
+                                                                                               ]
+                                                                                             ) ;
+                                                                          rdf:type owl:Class
+                                                                        ] .
+
+
+###  https://w3id.org/pmd/co/PressureDimension
+<https://w3id.org/pmd/co/PressureDimension> rdf:type owl:Class ;
+                                            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                  owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                                ] ;
+                                            rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
+
+
+###  https://w3id.org/pmd/co/PressureRelated
+<https://w3id.org/pmd/co/PressureRelated> rdf:type owl:Class ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                            owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                          ] ;
+                                          <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over pressure" .
+
+
+###  https://w3id.org/pmd/co/SecondDerivativeOfEnergy
+<https://w3id.org/pmd/co/SecondDerivativeOfEnergy> rdf:type owl:Class ;
+                                                   owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyOrder> ;
+                                                                         owl:hasValue 2
+                                                                       ] ;
+                                                   rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedPhysicalDisposition> ;
+                                                   <http://www.w3.org/2004/02/skos/core#definition> """A Physical Disposition specifying the second derivative of one of the energies at certain region of thermodynamic (Pressure, Volume, Temperature, Concentration) space.
+
+Sometimes called response functions, many of the materials properties are actually second derivatives of the free energy over some thermodynamic qualities (Pressure, Temperature, Volume). For Concentration as well, though less commonly,
+
+Since (P,V) coordinates are usually not used together, in the taxonomy we see only these combinations of derivatives:
+dTdT, dPdP, dVdV, dPdT - the latter canbe re-calculated as dVdT.
+
+https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
+
+
+###  https://w3id.org/pmd/co/SimuationMeasurementDatum
+<https://w3id.org/pmd/co/SimuationMeasurementDatum> rdf:type owl:Class ;
+                                                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                          owl:onProperty <http://purl.obolibrary.org/obo/OBI_0000312> ;
+                                                                          owl:someValuesFrom <https://w3id.org/pmd/co/SimulationProcess>
+                                                                        ] ;
+                                                    rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000109> ,
+                                                                    <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                                    <http://www.w3.org/2004/02/skos/core#definition> "Measurement datum, which is the specified output of some simulation process" .
+
+
+###  https://w3id.org/pmd/co/SimulatedDisposition
+<https://w3id.org/pmd/co/SimulatedDisposition> rdf:type owl:Class ;
+                                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                     owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000016>
+                                                                   ] ;
+                                               rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                               <http://www.w3.org/2004/02/skos/core#definition> "As opposite to simulated quality, it denotes the behavior of the material which is put into some given conditions (i.e, specifying its qualities)" .
+
+
+###  https://w3id.org/pmd/co/SimulatedHeatCapacity
+<https://w3id.org/pmd/co/SimulatedHeatCapacity> rdf:type owl:Class ;
+                                                rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                                  owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                ] ;
+                                                <http://www.w3.org/2004/02/skos/core#definition> "Second derivative of free energy over temperature" .
+
+
+###  https://w3id.org/pmd/co/SimulatedMaterial
+<https://w3id.org/pmd/co/SimulatedMaterial> rdf:type owl:Class ;
+                                            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                  owl:someValuesFrom <https://w3id.org/pmd/co/CMSOMaterial>
+                                                                ] ;
+                                            rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "Simulation Entity denoting the material of which some object is made" .
+
+
+###  https://w3id.org/pmd/co/SimulatedPhysicalDisposition
+<https://w3id.org/pmd/co/SimulatedPhysicalDisposition> rdf:type owl:Class ;
+                                                       owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                             owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000016>
+                                                                           ] ,
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyOrder> ;
+                                                                             owl:someValuesFrom xsd:integer
+                                                                           ] ;
+                                                       rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedDisposition> ,
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                                         owl:someValuesFrom <https://w3id.org/pmd/co/SimulatedPhysicalQuality>
+                                                                       ] ;
+                                                       rdfs:comment "Dispositions which carry dependency to the one of the free energies quantities (Gibbs or Helmholtz one) used in physics. Instantiating physical results as instances of this class will allow to find connexions between different properties." .
+
+
+###  https://w3id.org/pmd/co/SimulatedPhysicalQuality
+<https://w3id.org/pmd/co/SimulatedPhysicalQuality> rdf:type owl:Class ;
+                                                   owl:equivalentClass [ rdf:type owl:Class ;
+                                                                         owl:oneOf ( <https://w3id.org/pmd/co/ConcentrationParameter>
+                                                                                     <https://w3id.org/pmd/co/PressureParameter>
+                                                                                     <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                                     <https://w3id.org/pmd/co/VolumeParameter>
+                                                                                   )
+                                                                       ] ;
+                                                   rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedQuality> ;
+                                                   <http://www.w3.org/2004/02/skos/core#definition> "Special class which denotes qualites, on which many physical properties (qualities or dispositions) depend. In particular, PhysicalDisposition class." .
+
+
+###  https://w3id.org/pmd/co/SimulatedQuality
+<https://w3id.org/pmd/co/SimulatedQuality> rdf:type owl:Class ;
+                                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                 owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000019>
+                                                               ] ;
+                                           rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                           rdfs:comment "SimulationEntity denoting Quality" .
+
+
+###  https://w3id.org/pmd/co/SimulationEntitty
+<https://w3id.org/pmd/co/SimulationEntitty> rdf:type owl:Class ;
+                                            owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                  owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000001>
+                                                                ] ;
+                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ;
+                                            rdfs:comment "Apollo Simulation, purely intentional entity?" ;
+                                            <http://www.w3.org/2004/02/skos/core#definition> "An entity which denotes a digital representation of some BFO entity: either material or immaterial , i.e., piece of metal, metric space, quality, behavior of a system of particles or organisms." .
+
+
+###  https://w3id.org/pmd/co/SimulationPlan
+<https://w3id.org/pmd/co/SimulationPlan> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000104> .
+
+
+###  https://w3id.org/pmd/co/TemperatureDimension
+<https://w3id.org/pmd/co/TemperatureDimension> rdf:type owl:Class ;
+                                               owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                     owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                   ] ;
+                                               rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
+
+
+###  https://w3id.org/pmd/co/TemperatureRelated
+<https://w3id.org/pmd/co/TemperatureRelated> rdf:type owl:Class ;
+                                             rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                               owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                             ] ;
+                                             <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over temperature" .
+
+
+###  https://w3id.org/pmd/co/TheoreticalBulkModulus
+<https://w3id.org/pmd/co/TheoreticalBulkModulus> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                                 rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
+###  https://w3id.org/pmd/co/TheoreticalShearModulus
+<https://w3id.org/pmd/co/TheoreticalShearModulus> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                                  rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
+###  https://w3id.org/pmd/co/TheoreticalYoungModulus
+<https://w3id.org/pmd/co/TheoreticalYoungModulus> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <https://w3id.org/pmd/co/LinearElastisityModulus> ;
+                                                  rdfs:comment "Added Theoretical not to mix with real physical property" .
+
+
+###  https://w3id.org/pmd/co/ThermalExpansion
+<https://w3id.org/pmd/co/ThermalExpansion> rdf:type owl:Class ;
+                                           rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
+                                                           [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                                                    owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                                                  ]
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                                                    owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                                  ]
+                                                                                ) ;
+                                                             rdf:type owl:Class
+                                                           ] ;
+                                           <http://www.w3.org/2004/02/skos/core#definition> "Second mixed derivative of free energy over pressure&temperature" .
+
+
+###  https://w3id.org/pmd/co/ThermalLinearExpansion
+<https://w3id.org/pmd/co/ThermalLinearExpansion> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/ThermalExpansion> ;
+                                                 <http://www.w3.org/2004/02/skos/core#definition> "Measure of relative linear deformation with temperature" .
+
+
+###  https://w3id.org/pmd/co/ThermalVolumeExpansion
+<https://w3id.org/pmd/co/ThermalVolumeExpansion> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/ThermalExpansion> ;
+                                                 <http://www.w3.org/2004/02/skos/core#definition> "Measure of relative volume change with temperature" .
+
+
+###  https://w3id.org/pmd/co/ThermodynamicDimension
+<https://w3id.org/pmd/co/ThermodynamicDimension> rdf:type owl:Class ;
+                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                       owl:someValuesFrom <https://w3id.org/pmd/co/SimulatedPhysicalQuality>
+                                                                     ] ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/ParametricDimension> .
+
+
+###  https://w3id.org/pmd/co/Unary
+<https://w3id.org/pmd/co/Unary> rdf:type owl:Class ;
+                                rdfs:subClassOf <https://w3id.org/pmd/co/CMSOMaterial> .
+
+
+###  https://w3id.org/pmd/co/VolumeDimension
+<https://w3id.org/pmd/co/VolumeDimension> rdf:type owl:Class ;
+                                          owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
+                                                                owl:hasValue <https://w3id.org/pmd/co/VolumeParameter>
+                                                              ] ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
+
+
+###  https://w3id.org/pmd/co/VolumeRelated
+<https://w3id.org/pmd/co/VolumeRelated> rdf:type owl:Class ;
+                                        rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
+                                                          owl:hasValue <https://w3id.org/pmd/co/VolumeParameter>
+                                                        ] ;
+                                        <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over length/volume" .
+
+
+###  https://w3id.org/pmd/co/ZeroDerivativeOfEnergy
+<https://w3id.org/pmd/co/ZeroDerivativeOfEnergy> rdf:type owl:Class ;
+                                                 owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyOrder> ;
+                                                                       owl:hasValue 0
+                                                                     ] ;
+                                                 rdfs:subClassOf <https://w3id.org/pmd/co/SimulatedPhysicalDisposition> .
+
+
+###  https://w3id.org/pmd/co/pressureUnit
+<https://w3id.org/pmd/co/pressureUnit> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000003> .
+
+
+###  https://w3id.org/pmd/co/temperatureUnit
+<https://w3id.org/pmd/co/temperatureUnit> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000003> .
+
+
+###  https://w3id.org/pmd/co/volumeUnit
+<https://w3id.org/pmd/co/volumeUnit> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000003> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K
+<https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> rdf:type owl:NamedIndividual ,
+                                                                               <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                                      <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/KelvinDegree> ;
+                                                                      <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_ElasticTest0> ,
+                                                                                                                   <https://w3id.org/pmd/co/SimulationProcess_VolumeTest0> ;
+                                                                      <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                                      <http://purl.obolibrary.org/obo/OBI_0001937> 0 .
+
+
+###  https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=15Ang/atom
+<https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=15Ang/atom> rdf:type owl:NamedIndividual ,
+                                                                                  <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                                         <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Angstrom> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/VolumeParameter> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001937> 15 .
+
+
+###  https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=18Ang/atom
+<https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=18Ang/atom> rdf:type owl:NamedIndividual ,
+                                                                                  <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                                         <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Angstrom> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/VolumeParameter> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001937> 18 .
+
+
+###  https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=21Ang/atom
+<https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=21Ang/atom> rdf:type owl:NamedIndividual ,
+                                                                                  <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                                         <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Angstrom> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/VolumeParameter> ;
+                                                                         <http://purl.obolibrary.org/obo/OBI_0001937> 21 .
+
+
+###  https://w3id.org/pmd/co/Ag
+<https://w3id.org/pmd/co/Ag> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/Unary> .
+
+
+###  https://w3id.org/pmd/co/Al
+<https://w3id.org/pmd/co/Al> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/CMSOMaterial> ,
+                                      <https://w3id.org/pmd/co/Unary> .
+
+
+###  https://w3id.org/pmd/co/Angstrom
+<https://w3id.org/pmd/co/Angstrom> rdf:type owl:NamedIndividual ,
+                                            <http://purl.obolibrary.org/obo/UO_0000001> .
+
+
+###  https://w3id.org/pmd/co/Atmospheres
+<https://w3id.org/pmd/co/Atmospheres> rdf:type owl:NamedIndividual ,
+                                               <https://w3id.org/pmd/co/pressureUnit> .
+
+
+###  https://w3id.org/pmd/co/BulkModulusValue_ElasticTest0
+<https://w3id.org/pmd/co/BulkModulusValue_ElasticTest0> rdf:type owl:NamedIndividual ,
+                                                                 <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                        <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/GigaPascal> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0001937> 650 .
+
+
+###  https://w3id.org/pmd/co/CelsiusDegree
+<https://w3id.org/pmd/co/CelsiusDegree> rdf:type owl:NamedIndividual ,
+                                                 <https://w3id.org/pmd/co/temperatureUnit> .
+
+
+###  https://w3id.org/pmd/co/ConcentrationParameter
+<https://w3id.org/pmd/co/ConcentrationParameter> rdf:type owl:NamedIndividual ,
+                                                          <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
+
+
+###  https://w3id.org/pmd/co/Cu
+<https://w3id.org/pmd/co/Cu> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/CMSOMaterial> ,
+                                      <https://w3id.org/pmd/co/Unary> .
+
+
+###  https://w3id.org/pmd/co/EquilibriumVolumeValue_VolumeTest0
+<https://w3id.org/pmd/co/EquilibriumVolumeValue_VolumeTest0> rdf:type owl:NamedIndividual ,
+                                                                      <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                             <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/cubicAngstrom> ;
+                                                             <http://purl.obolibrary.org/obo/OBI_0001937> 18.5 .
+
+
+###  https://w3id.org/pmd/co/Fe
+<https://w3id.org/pmd/co/Fe> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/Unary> .
+
+
+###  https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest0
+<https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest0> rdf:type owl:NamedIndividual ,
+                                                               <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                      <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/eV_per_atom> ;
+                                                      <http://purl.obolibrary.org/obo/OBI_0001937> -100 .
+
+
+###  https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest1
+<https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest1> rdf:type owl:NamedIndividual ,
+                                                               <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                      <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/eV_per_atom> ;
+                                                      <http://purl.obolibrary.org/obo/OBI_0001937> -300 .
+
+
+###  https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest2
+<https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest2> rdf:type owl:NamedIndividual ,
+                                                               <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                      <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/eV_per_atom> ;
+                                                      <http://purl.obolibrary.org/obo/OBI_0001937> -200 .
+
+
+###  https://w3id.org/pmd/co/GigaPascal
+<https://w3id.org/pmd/co/GigaPascal> rdf:type owl:NamedIndividual ,
+                                              <https://w3id.org/pmd/co/pressureUnit> .
+
+
+###  https://w3id.org/pmd/co/InputGrid_ElasticTest
+<https://w3id.org/pmd/co/InputGrid_ElasticTest> rdf:type owl:NamedIndividual ;
+                                                <https://w3id.org/pmd/co/hasDimension> <https://w3id.org/pmd/co/PressureInterval_ElasticTest> ,
+                                                                                       <https://w3id.org/pmd/co/TemperatureInterval_ElasticTest> .
+
+
+###  https://w3id.org/pmd/co/InputGrid_EnergyTest
+<https://w3id.org/pmd/co/InputGrid_EnergyTest> rdf:type owl:NamedIndividual ,
+                                                        <https://w3id.org/pmd/co/ParametricSpace> ;
+                                               <https://w3id.org/pmd/co/hasDimension> <https://w3id.org/pmd/co/TemperatureInterval_EnergyTest> ,
+                                                                                      <https://w3id.org/pmd/co/VolumeInterval_EnergytTest> .
+
+
+###  https://w3id.org/pmd/co/InputGrid_VolumeTest
+<https://w3id.org/pmd/co/InputGrid_VolumeTest> rdf:type owl:NamedIndividual ;
+                                               <https://w3id.org/pmd/co/hasDimension> <https://w3id.org/pmd/co/PressureInterval_VolumeTest> ,
+                                                                                      <https://w3id.org/pmd/co/TemperatureInterval_VolumeTest> .
+
+
+###  https://w3id.org/pmd/co/KelvinDegree
+<https://w3id.org/pmd/co/KelvinDegree> rdf:type owl:NamedIndividual ,
+                                                <https://w3id.org/pmd/co/temperatureUnit> .
+
+
+###  https://w3id.org/pmd/co/Nb
+<https://w3id.org/pmd/co/Nb> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/CMSOMaterial> .
+
+
+###  https://w3id.org/pmd/co/Pascal
+<https://w3id.org/pmd/co/Pascal> rdf:type owl:NamedIndividual ,
+                                          <https://w3id.org/pmd/co/pressureUnit> .
+
+
+###  https://w3id.org/pmd/co/Pd
+<https://w3id.org/pmd/co/Pd> rdf:type owl:NamedIndividual ,
+                                      <https://w3id.org/pmd/co/CMSOMaterial> ,
+                                      <https://w3id.org/pmd/co/Unary> .
+
+
+###  https://w3id.org/pmd/co/PressureInterval_ElasticTest
+<https://w3id.org/pmd/co/PressureInterval_ElasticTest> rdf:type owl:NamedIndividual ;
+                                                       <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
+                                                       <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                       <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
+                                                       <https://w3id.org/pmd/co/hasUpperBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> .
+
+
+###  https://w3id.org/pmd/co/PressureInterval_VolumeTest
+<https://w3id.org/pmd/co/PressureInterval_VolumeTest> rdf:type owl:NamedIndividual ;
+                                                      <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
+                                                      <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                      <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/PressureValue_P=0atm> .
+
+
+###  https://w3id.org/pmd/co/PressureParameter
+<https://w3id.org/pmd/co/PressureParameter> rdf:type owl:NamedIndividual ,
+                                                     <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
+
+
+###  https://w3id.org/pmd/co/SimulatedBulkModulus
+<https://w3id.org/pmd/co/SimulatedBulkModulus> rdf:type owl:NamedIndividual ,
+                                                        <https://w3id.org/pmd/co/TheoreticalBulkModulus> .
+
+
+###  https://w3id.org/pmd/co/SimulatedEquilibriumVolume
+<https://w3id.org/pmd/co/SimulatedEquilibriumVolume> rdf:type owl:NamedIndividual ,
+                                                              <https://w3id.org/pmd/co/EquilibriumAtomicVolume> .
+
+
+###  https://w3id.org/pmd/co/SimulatedFreeEnergy
+<https://w3id.org/pmd/co/SimulatedFreeEnergy> rdf:type owl:NamedIndividual ,
+                                                       <https://w3id.org/pmd/co/HelmholtzFreeEneergy> .
+
+
+###  https://w3id.org/pmd/co/SimulatedObject_Nb-sample
+<https://w3id.org/pmd/co/SimulatedObject_Nb-sample> rdf:type owl:NamedIndividual .
+
+
+###  https://w3id.org/pmd/co/SimulationPlan_ElasticTest
+<https://w3id.org/pmd/co/SimulationPlan_ElasticTest> rdf:type owl:NamedIndividual ,
+                                                              <https://w3id.org/pmd/co/SimulationPlan> ;
+                                                     <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_ElasticTest> ;
+                                                     <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedBulkModulus> .
+
+
+###  https://w3id.org/pmd/co/SimulationPlan_EnergyTest
+<https://w3id.org/pmd/co/SimulationPlan_EnergyTest> rdf:type owl:NamedIndividual ,
+                                                             <https://w3id.org/pmd/co/SimulationPlan> ;
+                                                    <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_EnergyTest> ;
+                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedFreeEnergy> .
+
+
+###  https://w3id.org/pmd/co/SimulationPlan_VolumeTest
+<https://w3id.org/pmd/co/SimulationPlan_VolumeTest> rdf:type owl:NamedIndividual ,
+                                                             <https://w3id.org/pmd/co/SimulationPlan> ;
+                                                    <https://w3id.org/pmd/co/hasInputParameterSpace> <https://w3id.org/pmd/co/InputGrid_VolumeTest> ;
+                                                    <https://w3id.org/pmd/co/hasOutputDisposition> <https://w3id.org/pmd/co/SimulatedEquilibriumVolume> .
+
+
+###  https://w3id.org/pmd/co/SimulationProcess_ElasticTest0
+<https://w3id.org/pmd/co/SimulationProcess_ElasticTest0> rdf:type owl:NamedIndividual ,
+                                                                  <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                         <http://purl.obolibrary.org/obo/OBI_0000293> <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> ,
+                                                                                                      <https://w3id.org/pmd/co/PressureValue_P=0atm> ,
+                                                                                                      <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                         <http://purl.obolibrary.org/obo/OBI_0000299> <https://w3id.org/pmd/co/BulkModulusValue_ElasticTest0> ;
+                                                         <https://w3id.org/pmd/co/hasSimulationNumber> 0 .
+
+
+###  https://w3id.org/pmd/co/SimulationProcess_EnergyTest0
+<https://w3id.org/pmd/co/SimulationProcess_EnergyTest0> rdf:type owl:NamedIndividual ,
+                                                                 <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000293> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=15Ang/atom> ,
+                                                                                                     <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> ,
+                                                                                                     <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000299> <https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest0> ;
+                                                        <https://w3id.org/pmd/co/hasSimulationNumber> 0 .
+
+
+###  https://w3id.org/pmd/co/SimulationProcess_EnergyTest1
+<https://w3id.org/pmd/co/SimulationProcess_EnergyTest1> rdf:type owl:NamedIndividual ,
+                                                                 <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000293> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=18Ang/atom> ,
+                                                                                                     <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> ,
+                                                                                                     <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000299> <https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest1> ;
+                                                        <https://w3id.org/pmd/co/hasSimulationNumber> 1 .
+
+
+###  https://w3id.org/pmd/co/SimulationProcess_EnergyTest2
+<https://w3id.org/pmd/co/SimulationProcess_EnergyTest2> rdf:type owl:NamedIndividual ,
+                                                                 <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000293> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=21Ang/atom> ,
+                                                                                                     <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> ,
+                                                                                                     <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000299> <https://w3id.org/pmd/co/FreeEnergyValue_EnergyTest2> ;
+                                                        <https://w3id.org/pmd/co/hasSimulationNumber> 2 .
+
+
+###  https://w3id.org/pmd/co/SimulationProcess_VolumeTest0
+<https://w3id.org/pmd/co/SimulationProcess_VolumeTest0> rdf:type owl:NamedIndividual ,
+                                                                 <https://w3id.org/pmd/co/SimulationProcess> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000293> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ,
+                                                                                                     <https://w3id.org/pmd/co/SimulatedObject_Nb-sample> ,
+                                                                                                     <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
+                                                        <http://purl.obolibrary.org/obo/OBI_0000299> <https://w3id.org/pmd/co/EquilibriumVolumeValue_VolumeTest0> ;
+                                                        <https://w3id.org/pmd/co/hasSimulationNumber> 0 .
+
+
+###  https://w3id.org/pmd/co/TemperatureInterval_ElasticTest
+<https://w3id.org/pmd/co/TemperatureInterval_ElasticTest> rdf:type owl:NamedIndividual ;
+                                                          <https://w3id.org/pmd/co/hasLowerBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                          <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                          <https://w3id.org/pmd/co/hasPoint> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                          <https://w3id.org/pmd/co/hasUpperBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                          <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
+
+
+###  https://w3id.org/pmd/co/TemperatureInterval_EnergyTest
+<https://w3id.org/pmd/co/TemperatureInterval_EnergyTest> rdf:type owl:NamedIndividual ;
+                                                         <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                         <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                         <https://w3id.org/pmd/co/hasUpperBoundary> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
+                                                         <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
+
+
+###  https://w3id.org/pmd/co/TemperatureInterval_VolumeTest
+<https://w3id.org/pmd/co/TemperatureInterval_VolumeTest> rdf:type owl:NamedIndividual ;
+                                                         <https://w3id.org/pmd/co/hasLowerBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                         <https://w3id.org/pmd/co/hasPoint> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                         <https://w3id.org/pmd/co/hasUpperBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
+                                                         <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
+
+
+###  https://w3id.org/pmd/co/TemperatureParameter
+<https://w3id.org/pmd/co/TemperatureParameter> rdf:type owl:NamedIndividual ,
+                                                        <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
+
+
+###  https://w3id.org/pmd/co/VolumeInterval_EnergytTest
+<https://w3id.org/pmd/co/VolumeInterval_EnergytTest> rdf:type owl:NamedIndividual ;
+                                                     <https://w3id.org/pmd/co/hasLowerBoundary> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=15Ang/atom> ;
+                                                     <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/VolumeParameter> ;
+                                                     <https://w3id.org/pmd/co/hasPoint> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=15Ang/atom> ,
+                                                                                        <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=18Ang/atom> ,
+                                                                                        <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=21Ang/atom> ;
+                                                     <https://w3id.org/pmd/co/hasUpperBoundary> <https://thermodynamics-of-alloys-ontology.org#VolumeValue_V=21Ang/atom> ;
+                                                     <https://w3id.org/pmd/co/hasNumberOfPoints> 3 .
+
+
+###  https://w3id.org/pmd/co/VolumeParameter
+<https://w3id.org/pmd/co/VolumeParameter> rdf:type owl:NamedIndividual ,
+                                                   <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
+
+
+###  https://w3id.org/pmd/co/amorphousStructure
+<https://w3id.org/pmd/co/amorphousStructure> rdf:type owl:NamedIndividual ,
+                                                      <https://w3id.org/pmd/co/NonCrystal> .
+
+
+###  https://w3id.org/pmd/co/bccStructure
+<https://w3id.org/pmd/co/bccStructure> rdf:type owl:NamedIndividual ,
+                                                <https://w3id.org/pmd/co/CrystalPeriodic> .
+
+
+###  https://w3id.org/pmd/co/cubicAngstrom
+<https://w3id.org/pmd/co/cubicAngstrom> rdf:type owl:NamedIndividual ,
+                                                 <https://w3id.org/pmd/co/volumeUnit> .
+
+
+###  https://w3id.org/pmd/co/eV_per_atom
+<https://w3id.org/pmd/co/eV_per_atom> rdf:type owl:NamedIndividual ,
+                                               <https://w3id.org/pmd/co/temperatureUnit> .
+
+
+###  https://w3id.org/pmd/co/fccStructure
+<https://w3id.org/pmd/co/fccStructure> rdf:type owl:NamedIndividual ,
+                                                <https://w3id.org/pmd/co/CrystalPeriodic> .
+
+
+###  https://w3id.org/pmd/co/liquidStructure
+<https://w3id.org/pmd/co/liquidStructure> rdf:type owl:NamedIndividual .
+
+
+###  https://w3id.org/pmd/co/scStructure
+<https://w3id.org/pmd/co/scStructure> rdf:type owl:NamedIndividual ,
+                                               <https://w3id.org/pmd/co/CrystalPeriodic> .
+
+
+###  https://w3id.org/pmd/co/PressureValue_P=0atm
+<https://w3id.org/pmd/co/PressureValue_P=0atm> rdf:type owl:NamedIndividual ,
+                                                        <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                               <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Atmospheres> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_ElasticTest0> ,
+                                                                                            <https://w3id.org/pmd/co/SimulationProcess_EnergyTest0> ,
+                                                                                            <https://w3id.org/pmd/co/SimulationProcess_VolumeTest0> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001937> 0 .
+
+
+###  https://w3id.org/pmd/co/PressureValue_P=1atm
+<https://w3id.org/pmd/co/PressureValue_P=1atm> rdf:type owl:NamedIndividual ,
+                                                        <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                               <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Atmospheres> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest1> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001937> 1 .
+
+
+###  https://w3id.org/pmd/co/PressureValue_P=20atm
+<https://w3id.org/pmd/co/PressureValue_P=20atm> rdf:type owl:NamedIndividual ,
+                                                         <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Atmospheres> ;
+                                                <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest2> ;
+                                                <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                <http://purl.obolibrary.org/obo/OBI_0001937> 20 .
+
+
+###  https://w3id.org/pmd/co/TemperatureValue_T=300K
+<https://w3id.org/pmd/co/TemperatureValue_T=300K> rdf:type owl:NamedIndividual ,
+                                                           <http://purl.obolibrary.org/obo/OBI_0001931> ;
+                                                  <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/KelvinDegree> ;
+                                                  <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest0> ,
+                                                                                               <https://w3id.org/pmd/co/SimulationProcess_EnergyTest1> ,
+                                                                                               <https://w3id.org/pmd/co/SimulationProcess_EnergyTest2> ;
+                                                  <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                  <http://purl.obolibrary.org/obo/OBI_0001937> 300 .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <https://w3id.org/pmd/co/FirstDerivativeOfEnergy>
+                <https://w3id.org/pmd/co/SecondDerivativeOfEnergy>
+                <https://w3id.org/pmd/co/ZeroDerivativeOfEnergy>
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( <https://w3id.org/pmd/co/PressureDimension>
+                <https://w3id.org/pmd/co/TemperatureDimension>
+                <https://w3id.org/pmd/co/VolumeDimension>
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
