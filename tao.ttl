@@ -15,41 +15,41 @@
 #    Object Properties
 #################################################################
 
-###  http://www.thermodynamic-alloy-ontology.org#SimulatedCharacteristicOf
+###  http://www.thermodynamic-alloy-ontology.org/SimulatedCharacteristicOf
 :SimulatedCharacteristicOf rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> ;
                            owl:inverseOf :hasSimulatedCharacteristic .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#SimulatedDispositionOf
+###  http://www.thermodynamic-alloy-ontology.org/SimulatedDispositionOf
 :SimulatedDispositionOf rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf :SimulatedCharacteristicOf ;
                         owl:inverseOf :hasSimulatedDisposition .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#SimulatedQualityOf
+###  http://www.thermodynamic-alloy-ontology.org/SimulatedQualityOf
 :SimulatedQualityOf rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf :SimulatedCharacteristicOf ;
                     owl:inverseOf :hasSimulatedQuality .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedCharacteristic
+###  http://www.thermodynamic-alloy-ontology.org/hasSimulatedCharacteristic
 :hasSimulatedCharacteristic rdf:type owl:ObjectProperty ;
                             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000051> ;
                             <http://purl.obolibrary.org/obo/IAO_0000118> "SimulatedBearerOf" .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedDisposition
+###  http://www.thermodynamic-alloy-ontology.org/hasSimulatedDisposition
 :hasSimulatedDisposition rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf :hasSimulatedCharacteristic .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedQuality
+###  http://www.thermodynamic-alloy-ontology.org/hasSimulatedQuality
 :hasSimulatedQuality rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf :hasSimulatedCharacteristic .
 
 
-###  http://www.thermodynamic-alloy-ontology.org#hasSimulatedRealisation
+###  http://www.thermodynamic-alloy-ontology.org/hasSimulatedRealisation
 :hasSimulatedRealisation rdf:type owl:ObjectProperty ;
                          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000050> .
 
@@ -221,7 +221,7 @@
                                           rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
                                                           [ rdf:type owl:Restriction ;
                                                             owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                            owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                            owl:hasValue <https://w3id.org/pmd/co/SimulatedPressure>
                                                           ] ;
                                           <http://www.w3.org/2004/02/skos/core#definition> "Second derivative of free energy over pressure" .
 
@@ -453,7 +453,7 @@ Non-examples (enlisted, but not ascending/descending):
 <https://w3id.org/pmd/co/PressureDimension> rdf:type owl:Class ;
                                             owl:equivalentClass [ rdf:type owl:Restriction ;
                                                                   owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
-                                                                  owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                                  owl:hasValue <https://w3id.org/pmd/co/SimulatedPressure>
                                                                 ] ;
                                             rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
 
@@ -463,7 +463,7 @@ Non-examples (enlisted, but not ascending/descending):
                                           rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
                                                           [ rdf:type owl:Restriction ;
                                                             owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                            owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                            owl:hasValue <https://w3id.org/pmd/co/SimulatedPressure>
                                                           ] ;
                                           <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over pressure" .
 
@@ -517,7 +517,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                 rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
                                                                 [ rdf:type owl:Restriction ;
                                                                   owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                                  owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                  owl:hasValue <https://w3id.org/pmd/co/SimulatedTemperature>
                                                                 ] ;
                                                 <http://www.w3.org/2004/02/skos/core#definition> "Second derivative of free energy over temperature" .
 
@@ -559,8 +559,8 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 <https://w3id.org/pmd/co/SimulatedPhysicalQuality> rdf:type owl:Class ;
                                                    owl:equivalentClass [ rdf:type owl:Class ;
                                                                          owl:oneOf ( <https://w3id.org/pmd/co/ConcentrationParameter>
-                                                                                     <https://w3id.org/pmd/co/PressureParameter>
-                                                                                     <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                                     <https://w3id.org/pmd/co/SimulatedPressure>
+                                                                                     <https://w3id.org/pmd/co/SimulatedTemperature>
                                                                                      <https://w3id.org/pmd/co/VolumeParameter>
                                                                                    )
                                                                        ] ;
@@ -610,7 +610,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 <https://w3id.org/pmd/co/TemperatureDimension> rdf:type owl:Class ;
                                                owl:equivalentClass [ rdf:type owl:Restriction ;
                                                                      owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
-                                                                     owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                     owl:hasValue <https://w3id.org/pmd/co/SimulatedTemperature>
                                                                    ] ;
                                                rdfs:subClassOf <https://w3id.org/pmd/co/ThermodynamicDimension> .
 
@@ -620,7 +620,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                              rdfs:subClassOf <https://w3id.org/pmd/co/FirstDerivativeOfEnergy> ,
                                                              [ rdf:type owl:Restriction ;
                                                                owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                               owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                               owl:hasValue <https://w3id.org/pmd/co/SimulatedTemperature>
                                                              ] ;
                                              <http://www.w3.org/2004/02/skos/core#definition> "Derivatives over temperature" .
 
@@ -630,11 +630,11 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                            rdfs:subClassOf <https://w3id.org/pmd/co/SecondDerivativeOfEnergy> ,
                                                            [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
                                                                                     owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                                                    owl:hasValue <https://w3id.org/pmd/co/PressureParameter>
+                                                                                    owl:hasValue <https://w3id.org/pmd/co/SimulatedPressure>
                                                                                   ]
                                                                                   [ rdf:type owl:Restriction ;
                                                                                     owl:onProperty <https://w3id.org/pmd/co/isDerivativeOfEnergyBy> ;
-                                                                                    owl:hasValue <https://w3id.org/pmd/co/TemperatureParameter>
+                                                                                    owl:hasValue <https://w3id.org/pmd/co/SimulatedTemperature>
                                                                                   ]
                                                                                 ) ;
                                                              rdf:type owl:Class
@@ -721,7 +721,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                       <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/KelvinDegree> ;
                                                                       <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_ElasticTest0> ,
                                                                                                                    <https://w3id.org/pmd/co/SimulationProcess_VolumeTest0> ;
-                                                                      <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                                      <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/SimulatedTemperature> ;
                                                                       <http://purl.obolibrary.org/obo/OBI_0001937> 0 .
 
 
@@ -874,7 +874,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 ###  https://w3id.org/pmd/co/PressureInterval_ElasticTest
 <https://w3id.org/pmd/co/PressureInterval_ElasticTest> rdf:type owl:NamedIndividual ;
                                                        <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
-                                                       <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                       <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/SimulatedPressure> ;
                                                        <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
                                                        <https://w3id.org/pmd/co/hasUpperBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> .
 
@@ -882,13 +882,8 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 ###  https://w3id.org/pmd/co/PressureInterval_VolumeTest
 <https://w3id.org/pmd/co/PressureInterval_VolumeTest> rdf:type owl:NamedIndividual ;
                                                       <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/PressureValue_P=0atm> ;
-                                                      <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                      <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/SimulatedPressure> ;
                                                       <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/PressureValue_P=0atm> .
-
-
-###  https://w3id.org/pmd/co/PressureParameter
-<https://w3id.org/pmd/co/PressureParameter> rdf:type owl:NamedIndividual ,
-                                                     <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
 
 
 ###  https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample
@@ -912,8 +907,18 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                     :hasSimulatedDisposition <https://w3id.org/pmd/co/SimulatedBulkModulus_of_Nb-sample> ,
                                                                              <https://w3id.org/pmd/co/SimulatedEquilibriumVolume_of_Nb-sample> ,
                                                                              <https://w3id.org/pmd/co/SimulatedFreeEnergy_of_Nb-sample> ;
-                                                    :hasSimulatedQuality <https://w3id.org/pmd/co/PressureParameter> ,
-                                                                         <https://w3id.org/pmd/co/TemperatureParameter> .
+                                                    :hasSimulatedQuality <https://w3id.org/pmd/co/SimulatedPressure> ,
+                                                                         <https://w3id.org/pmd/co/SimulatedTemperature> .
+
+
+###  https://w3id.org/pmd/co/SimulatedPressure
+<https://w3id.org/pmd/co/SimulatedPressure> rdf:type owl:NamedIndividual ,
+                                                     <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
+
+
+###  https://w3id.org/pmd/co/SimulatedTemperature
+<https://w3id.org/pmd/co/SimulatedTemperature> rdf:type owl:NamedIndividual ,
+                                                        <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
 
 
 ###  https://w3id.org/pmd/co/SimulationPlan_ElasticTest
@@ -990,7 +995,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 ###  https://w3id.org/pmd/co/TemperatureInterval_ElasticTest
 <https://w3id.org/pmd/co/TemperatureInterval_ElasticTest> rdf:type owl:NamedIndividual ;
                                                           <https://w3id.org/pmd/co/hasLowerBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
-                                                          <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                          <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/SimulatedTemperature> ;
                                                           <https://w3id.org/pmd/co/hasPoint> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
                                                           <https://w3id.org/pmd/co/hasUpperBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
                                                           <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
@@ -999,7 +1004,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 ###  https://w3id.org/pmd/co/TemperatureInterval_EnergyTest
 <https://w3id.org/pmd/co/TemperatureInterval_EnergyTest> rdf:type owl:NamedIndividual ;
                                                          <https://w3id.org/pmd/co/hasLowerBoundary> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
-                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/SimulatedTemperature> ;
                                                          <https://w3id.org/pmd/co/hasPoint> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
                                                          <https://w3id.org/pmd/co/hasUpperBoundary> <https://w3id.org/pmd/co/TemperatureValue_T=300K> ;
                                                          <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
@@ -1008,15 +1013,10 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
 ###  https://w3id.org/pmd/co/TemperatureInterval_VolumeTest
 <https://w3id.org/pmd/co/TemperatureInterval_VolumeTest> rdf:type owl:NamedIndividual ;
                                                          <https://w3id.org/pmd/co/hasLowerBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
-                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                         <https://w3id.org/pmd/co/hasParameter> <https://w3id.org/pmd/co/SimulatedTemperature> ;
                                                          <https://w3id.org/pmd/co/hasPoint> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
                                                          <https://w3id.org/pmd/co/hasUpperBoundary> <https://thermodynamics-of-alloys-ontology.org#TemperatureValue_T=0K> ;
                                                          <https://w3id.org/pmd/co/hasNumberOfPoints> 1 .
-
-
-###  https://w3id.org/pmd/co/TemperatureParameter
-<https://w3id.org/pmd/co/TemperatureParameter> rdf:type owl:NamedIndividual ,
-                                                        <https://w3id.org/pmd/co/SimulatedPhysicalQuality> .
 
 
 ###  https://w3id.org/pmd/co/VolumeInterval_EnergytTest
@@ -1076,7 +1076,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_ElasticTest0> ,
                                                                                             <https://w3id.org/pmd/co/SimulationProcess_EnergyTest0> ,
                                                                                             <https://w3id.org/pmd/co/SimulationProcess_VolumeTest0> ;
-                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/SimulatedPressure> ;
                                                <http://purl.obolibrary.org/obo/OBI_0001937> 0 .
 
 
@@ -1085,7 +1085,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                         <http://purl.obolibrary.org/obo/OBI_0001931> ;
                                                <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Atmospheres> ;
                                                <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest1> ;
-                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                               <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/SimulatedPressure> ;
                                                <http://purl.obolibrary.org/obo/OBI_0001937> 1 .
 
 
@@ -1094,7 +1094,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                          <http://purl.obolibrary.org/obo/OBI_0001931> ;
                                                 <http://purl.obolibrary.org/obo/IAO_0000039> <https://w3id.org/pmd/co/Atmospheres> ;
                                                 <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest2> ;
-                                                <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/PressureParameter> ;
+                                                <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/SimulatedPressure> ;
                                                 <http://purl.obolibrary.org/obo/OBI_0001937> 20 .
 
 
@@ -1105,7 +1105,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                   <http://purl.obolibrary.org/obo/OBI_0000295> <https://w3id.org/pmd/co/SimulationProcess_EnergyTest0> ,
                                                                                                <https://w3id.org/pmd/co/SimulationProcess_EnergyTest1> ,
                                                                                                <https://w3id.org/pmd/co/SimulationProcess_EnergyTest2> ;
-                                                  <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/TemperatureParameter> ;
+                                                  <http://purl.obolibrary.org/obo/OBI_0001927> <https://w3id.org/pmd/co/SimulatedTemperature> ;
                                                   <http://purl.obolibrary.org/obo/OBI_0001937> 300 .
 
 
