@@ -354,7 +354,7 @@
                                                                     owl:onProperty <https://w3id.org/pmd/co/hasParameter> ;
                                                                     owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000001>
                                                                   ] ;
-                                              rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                              rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> ;
                                               rdfs:comment "Integer or float values is fine. Should we include categorical dimensions here? E.g., cold, warm, hot dimension?" ;
                                               <http://www.w3.org/2004/02/skos/core#definition> """Simulation entity which denotes an enlisted range of values of an arbitrary measurable quantity (parameter) put on some axis in ascending or descending order with certain scale. 
 
@@ -395,7 +395,7 @@ Non-examples (enlisted, but not ascending/descending):
                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
                                                                 owl:onClass <https://w3id.org/pmd/co/ParametricDimension>
                                                               ] ;
-                                          rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> ;
                                           <http://www.w3.org/2004/02/skos/core#definition> """Simulation entity representing a space, which dimensions are parametric dimensions.
  E.g., pressure-volume space of a phase diagram, red-green-blue space of color representation, valence-arousal emotional space""" .
 
@@ -492,7 +492,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                           owl:someValuesFrom <https://w3id.org/pmd/co/SimulationProcess>
                                                                         ] ;
                                                     rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000109> ,
-                                                                    <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                                                    <https://w3id.org/pmd/co/SimulationEntity> ;
                                                     <http://www.w3.org/2004/02/skos/core#definition> "Measurement datum, which is the specified output of some simulation process" .
 
 
@@ -508,7 +508,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                      owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
                                                                      owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000016>
                                                                    ] ;
-                                               rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                               rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> ;
                                                <http://www.w3.org/2004/02/skos/core#definition> "As opposite to simulated quality, it denotes the behavior of the material which is put into some given conditions (i.e, specifying its qualities)" .
 
 
@@ -528,13 +528,13 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                   owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
                                                                   owl:someValuesFrom <https://w3id.org/pmd/co/CMSOMaterial>
                                                                 ] ;
-                                            rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                            rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> ;
                                             <http://www.w3.org/2004/02/skos/core#definition> "Simulation Entity denoting the material of which some object is made" .
 
 
 ###  https://w3id.org/pmd/co/SimulatedObject
 <https://w3id.org/pmd/co/SimulatedObject> rdf:type owl:Class ;
-                                          rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> .
+                                          rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> .
 
 
 ###  https://w3id.org/pmd/co/SimulatedPhysicalDisposition
@@ -574,7 +574,7 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                                  owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
                                                                  owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000019>
                                                                ] ;
-                                           rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntitty> ;
+                                           rdfs:subClassOf <https://w3id.org/pmd/co/SimulationEntity> ;
                                            rdfs:comment "SimulationEntity denoting Quality" .
 
 
@@ -590,15 +590,15 @@ https://phys.uri.edu/gerhard/PHY525/tln7.pdf""" .
                                                 rdfs:comment "Added Theoretical not to mix with real physical property" .
 
 
-###  https://w3id.org/pmd/co/SimulationEntitty
-<https://w3id.org/pmd/co/SimulationEntitty> rdf:type owl:Class ;
-                                            owl:equivalentClass [ rdf:type owl:Restriction ;
-                                                                  owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
-                                                                  owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000001>
-                                                                ] ;
-                                            rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ;
-                                            rdfs:comment "Apollo Simulation, purely intentional entity?" ;
-                                            <http://www.w3.org/2004/02/skos/core#definition> "An entity which denotes a digital representation of some BFO entity: either material or immaterial , i.e., piece of metal, metric space, quality, behavior of a system of particles or organisms." .
+###  https://w3id.org/pmd/co/SimulationEntity
+<https://w3id.org/pmd/co/SimulationEntity> rdf:type owl:Class ;
+                                           owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000219> ;
+                                                                 owl:someValuesFrom <http://purl.obolibrary.org/obo/BFO_0000001>
+                                                               ] ;
+                                           rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ;
+                                           rdfs:comment "Apollo Simulation, purely intentional entity?" ;
+                                           <http://www.w3.org/2004/02/skos/core#definition> "An entity which denotes a digital representation of some BFO entity: either material or immaterial , i.e., piece of metal, metric space, quality, behavior of a system of particles or organisms." .
 
 
 ###  https://w3id.org/pmd/co/SimulationPlan
