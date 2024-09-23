@@ -44,11 +44,11 @@ Periodic materials
 # Exemplary CQ:
 ## Is there any simulation result showing Bulk Modulus (B) of Nb at Temperature=300K and Pressure=0 atm? 
 
-property = {Bulk Modulus}
-material = {Niobium (Nb)}
-conditions = {Pressure = 1 atm, Temperature = 300 Kelvin, Deformation=none}  
+property = {Bulk Modulus} </br>
+material = {Niobium (Nb)}</br>
+conditions = {Pressure = 1 atm, Temperature = 300 Kelvin, Deformation=none}</br>  
 
-Answer to this CQ see below in SPARQL section.
+Answer to this CQ see below in [SPARQL section](#SPARQL-queries-for-Competency-Question-answering).
 
 # Ontology schema
 
