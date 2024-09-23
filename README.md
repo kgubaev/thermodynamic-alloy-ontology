@@ -89,63 +89,64 @@ And for heat expansion:
 
 These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources:
 
-![Uploading TOTAL0.png…]()
+![TOTAL0](https://github.com/user-attachments/assets/5254cfb5-1ee6-4522-bcf1-ac9c3168af98)
+
 
 1. First query asks for a simulation plan directly providing bulk modulus for a temperature between 0K and 500K:
    
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX pmd:<https://w3id.org/pmd/co/>
-PREFIX obo:<http://purl.obolibrary.org/obo/>
-
-SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit
-WHERE {
-?plan a pmd:SimulationPlan.
-?plan pmd:hasOutputDisposition ?resvalue.
-?resvalue a pmd:SimulatedBulkModulus.
-?plan pmd:hasInputParameterSpace ?ispace.
-?ispace pmd:hasDimension ?interval.
-?interval a pmd:TemperatureDimension.
-?interval pmd:hasLowerBoundary ?lbound.
-?interval pmd:hasUpperBoundary ?ubound.
-?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .
-?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .
-?lbound obo:IAO_0000039 ?unit
-FILTER (?lvalue>=0 && ?uvalue<=500)
-}
+PREFIX owl: <http://www.w3.org/2002/07/owl#></br>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#></br>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#></br>
+PREFIX pmd:<https://w3id.org/pmd/co/></br>
+PREFIX obo:<http://purl.obolibrary.org/obo/></br>
+</br>
+SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit</br>
+WHERE {</br>
+?plan a pmd:SimulationPlan.</br>
+?plan pmd:hasOutputDisposition ?resvalue.</br>
+?resvalue a pmd:SimulatedBulkModulus.</br>
+?plan pmd:hasInputParameterSpace ?ispace.</br>
+?ispace pmd:hasDimension ?interval.</br>
+?interval a pmd:TemperatureDimension.</br>
+?interval pmd:hasLowerBoundary ?lbound.</br>
+?interval pmd:hasUpperBoundary ?ubound.</br>
+?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .</br>
+?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .</br>
+?lbound obo:IAO_0000039 ?unit</br>
+FILTER (?lvalue>=0 && ?uvalue<=500)</br>
+}</br>
 
 2. Second query asks for a simulation plan providing free energy values for >=3 different volume values and for 0K-500K temperature range, which allows for calculating bulk modulus via 2nd derivative relation.
 
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX pmd:<https://w3id.org/pmd/co/>
-PREFIX obo:<http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#></br>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#></br>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#></br>
+PREFIX pmd:<https://w3id.org/pmd/co/></br>
+PREFIX obo:<http://purl.obolibrary.org/obo/></br>
 
-SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit
-WHERE {
-?plan a pmd:SimulationPlan.
-?plan pmd:hasOutputDisposition ?resvalue.
-?resvalue a pmd:ZeroDerivativeOfEnergy.
-?plan pmd:hasInputParameterSpace ?ispace.
-?ispace pmd:hasDimension ?intervalT.
-?intervalT a pmd:TemperatureDimension.
-?intervalT pmd:hasLowerBoundary ?lbound.
-?intervalT pmd:hasUpperBoundary ?ubound.
-?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .
-?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .
-?lbound obo:IAO_0000039 ?unit.
-?ispace pmd:hasDimension ?intervalV.
-?intervalV a pmd:VolumeDimension.
-?intervalV pmd:hasNumberOfPoints ?vpoints
-FILTER (?lvalue>=0 && ?uvalue<=500 && ?vpoints>=3)
-}
+SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit</br>
+WHERE { </br>
+?plan a pmd:SimulationPlan.</br>
+?plan pmd:hasOutputDisposition ?resvalue.</br>
+?resvalue a pmd:ZeroDerivativeOfEnergy.</br>
+?plan pmd:hasInputParameterSpace ?ispace.</br>
+?ispace pmd:hasDimension ?intervalT.</br>
+?intervalT a pmd:TemperatureDimension.</br>
+?intervalT pmd:hasLowerBoundary ?lbound.</br>
+?intervalT pmd:hasUpperBoundary ?ubound.</br>
+?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .</br>
+?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .</br>
+?lbound obo:IAO_0000039 ?unit.</br>
+?ispace pmd:hasDimension ?intervalV.</br>
+?intervalV a pmd:VolumeDimension.</br>
+?intervalV pmd:hasNumberOfPoints ?vpoints</br>
+FILTER (?lvalue>=0 && ?uvalue<=500 && ?vpoints>=3)</br>
+}</br>
 
 # Contact
 
-[Dr. Konstantin Gubaev]
+Dr. Konstantin Gubaev (Kostiantyn Hubaiev)
 
-ORCID ID: https://orcid.org/0000-0003-2612-8515
-work e-mail: kostiantyn.hubaiev@fiz-karlsruhe.de
-personal e-mail: yamir4eg@gmail.com
+ORCID ID: https://orcid.org/0000-0003-2612-8515</br>
+work e-mail: kostiantyn.hubaiev@fiz-karlsruhe.de</br>
+personal e-mail: yamir4eg@gmail.com</br>
