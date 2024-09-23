@@ -2,9 +2,13 @@ This ontology describes the material properties in certain (thermodynamic) condi
 
 # Table of Contents  
 [Scope of application](#Scope-of-application)  
+
 [Exemplary Competency Question](#Exemplary-CQ)
+
 [Ontology Schema](#Ontology-Schema)
+
 [SPARQL queries for Competency Question answering](#SPARQL-queries-for-Competency-Question-answering)
+
 [Contact](#Contact)
 
 # Scope of application
