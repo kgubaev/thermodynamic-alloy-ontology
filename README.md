@@ -9,6 +9,8 @@ This ontology describes the material properties in certain (thermodynamic) condi
 
 [SPARQL queries for Competency Question answering](#SPARQL-queries-for-Competency-Question-answering)
 
+[Connection between different data sources][#Exemplary-data-sources-connection]
+
 [Contact](#Contact)
 
 # Scope of application
@@ -42,7 +44,7 @@ Periodic materials
     o Metal-based solid solutions (mixtures with average formula Ta<sub>2.5</sub>V<sub>3.2</sub>Cr<sub>4.1</sub>, not exactly repeated) (for future)
       
 # Exemplary CQ:
-## Is there any simulation result showing Bulk Modulus (B) of Nb at Temperature=300K and Pressure=0 atm? 
+## Is there any simulation result showing Bulk Modulus (B) of Niobium (Nb) at Temperature=300K and Pressure=0 atm? 
 
 property = {Bulk Modulus} </br>
 material = {Niobium (Nb)}</br>
@@ -56,37 +58,37 @@ The ontology is designed in blocks.
 
 ## Experimental process
 
-First block is a PMDcore-based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
+First block is PMDcore-based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
 
 ![exp_full](https://github.com/user-attachments/assets/4b09416b-1025-4f30-8d3a-abad019383ff)
 
 ## Simulation process
 
-Next block is simulation process, which involves input and output as information content entities simulating the physical material and its properties (both qualities and dispositions from BFO-2020 perspective). Each simulation process takes one set of input parameters and provides one output value (of the corresponding property).
+Next block is simulation process, which involves input and output as information content entities simulating the physical material and its properties (both qualities and dispositions in BFO-2020 perspective). Each simulation process takes one set of input parameters and provides one output value (of the corresponding property).
 
 ![Screenshot 2024-09-23 103607](https://github.com/user-attachments/assets/64276803-131f-4d4e-bccd-5dfce54173e7)
 
 ## Simulation Plan
 
-The last block contains The simulation plan which contains all processes along with their values of input paramages(Qualities in BFO sense) and outputs (Dispositions in BFO sense. As well provides "explaination" of the calclated property, by relating it to free energy. Desired input and output of the simulation plan provide basis for prospective data linking of the simulation results, as you can see in SPARQL query section.
+The last block adds the simulation plan which contains all processes along with their values of input paramages (qualities in BFO sense) and outputs (dispositions in BFO sense). As well provides "explanation" of the calculated property, by relating it to free energy. Desired input and output of the simulation plan provide basis for prospective data linking of the simulation results, as you can see in SPARQL query section.
 
 ![Screenshot 2024-09-23 095239](https://github.com/user-attachments/assets/8c863c48-ddc4-495d-a526-ab5eba1ef4c3)
 
 # Patterns used in ontology
 
-Scalar value specification tells us that certain quantity has measure and unit:
+Scalar value specification tells us that certain quantity has measured value and unit:
 
 ![Screenshot 2024-09-23 095559](https://github.com/user-attachments/assets/66c2472a-0562-44d7-b76f-301b25af4bc6)
 
-Definitions of simulated entities (subclass of IAO:data item)
+Definitions of simulated entities (subclass of iao:datum)
 
 ![Screenshot 2024-09-23 095456](https://github.com/user-attachments/assets/c64ba0b3-a8cb-417d-b6fa-cb91cdb63201)
 
-Parametric dimension explains ranges of parameters involved in simulations (corresponding to thermodynamic conditions), And allows for calculating the intersections :
+Parametric dimension contains ranges of parameters involved in simulations (corresponding to thermodynamic conditions) and the amount of points in each dimension. This allows for calculating the intersections among ranges of parameters and the ability to perform derivation.
 
 ![Screenshot 2024-09-23 095545](https://github.com/user-attachments/assets/7cf1801a-dd61-4f89-be92-f28928b9de8c)
 
-Relation to free energy allows for connecting different properties with each other. It does not provide the exact formula however it shows the possibility of deriving one simulation result from another.
+Relation to free energy allows for connecting different properties with each other. It does not provide the exact formula, however it shows the possibility of deriving one simulation result from another.
 
 See example for bulk modulus:
 ![Screenshot 2024-09-23 095329](https://github.com/user-attachments/assets/e21f2edc-8e4e-4446-a1da-c26568539e33)
@@ -95,7 +97,7 @@ And for heat expansion:
 
 # SPARQL queries for Competency Question answering
 
-These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources:
+These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources. Proper units conversion possiblity to be added later, by now default SI temperature unts are assumed.  
 
 1. First query asks for a simulation plan directly providing bulk modulus for a temperature between 0K and 500K:
    
@@ -121,7 +123,7 @@ WHERE {</br>
 FILTER (?lvalue>=0 && ?uvalue<=500)</br>
 }</br>
 
-2. Second query asks for a simulation plan providing free energy values for >=3 different volume values and for 0K-500K temperature range, which allows for calculating bulk modulus via 2nd derivative relation.
+2. Second query asks for a simulation plan providing free energy values for >=3 different volume values for 0K-500K temperature range, which allows for calculating bulk modulus via 2nd derivative relation.
 
 PREFIX owl: <http://www.w3.org/2002/07/owl#></br>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#></br>
