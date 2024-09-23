@@ -1,5 +1,9 @@
 This ontology describes the material properties, obtained by the atomistic simulations in certain conditions.
 
+##### Table of Contents  
+[Scope of application](#Scope-of-application)  
+[Emphasis](#emphasis)  
+
 # Scope of application
 ## Properties
 Static, equilibrium, bulk:
@@ -43,7 +47,7 @@ Answer to this CQ see below in SPARQL section.
 
 The ontology is designed in blocks. First block is a PMD core based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
 
-![exper](https://github.com/user-attachments/assets/4680c33a-718b-4503-afc2-b845e76a1ebb)
+![exp_full](https://github.com/user-attachments/assets/4b09416b-1025-4f30-8d3a-abad019383ff)
 
 Next block is simulation process, which involves input and output as information content entities simulating the physical material and its properties (both qualities and dispositions from BFO-2020 perspective). Each simulation process takes one set of input parameters and provides one output value (of the corresponding property).
 
