@@ -52,13 +52,21 @@ Answer to this CQ see below in [SPARQL section](#SPARQL-queries-for-Competency-Q
 
 # Ontology schema
 
-The ontology is designed in blocks. First block is a PMD core based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
+The ontology is designed in blocks. 
+
+## Experimental process
+
+First block is a PMDcore-based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
 
 ![exp_full](https://github.com/user-attachments/assets/4b09416b-1025-4f30-8d3a-abad019383ff)
+
+## Simulation process
 
 Next block is simulation process, which involves input and output as information content entities simulating the physical material and its properties (both qualities and dispositions from BFO-2020 perspective). Each simulation process takes one set of input parameters and provides one output value (of the corresponding property).
 
 ![Screenshot 2024-09-23 103607](https://github.com/user-attachments/assets/64276803-131f-4d4e-bccd-5dfce54173e7)
+
+## Simulation Plan
 
 The last block contains The simulation plan which contains all processes along with their values of input paramages(Qualities in BFO sense) and outputs (Dispositions in BFO sense. As well provides "explaination" of the calclated property, by relating it to free energy. Desired input and output of the simulation plan provide basis for prospective data linking of the simulation results, as you can see in SPARQL query section.
 
@@ -88,9 +96,6 @@ And for heat expansion:
 # SPARQL queries for Competency Question answering
 
 These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources:
-
-![TOTAL0](https://github.com/user-attachments/assets/5254cfb5-1ee6-4522-bcf1-ac9c3168af98)
-
 
 1. First query asks for a simulation plan directly providing bulk modulus for a temperature between 0K and 500K:
    
@@ -142,6 +147,15 @@ WHERE { </br>
 ?intervalV pmd:hasNumberOfPoints ?vpoints</br>
 FILTER (?lvalue>=0 && ?uvalue<=500 && ?vpoints>=3)</br>
 }</br>
+
+# Exemplary data sources connection
+
+Hereby three different data sources (from left to right) are connected via derivative relations. This ontology provides semantic basis for such connections. </br>
+ - material science article</br>
+ - pyiron result</br>
+ - MaterialsProject entity</br>
+ 
+![TOTAL0](https://github.com/user-attachments/assets/5254cfb5-1ee6-4522-bcf1-ac9c3168af98)
 
 # Contact
 
