@@ -1,8 +1,11 @@
-This ontology describes the material properties, obtained by the atomistic simulations in certain conditions.
+This ontology describes the material properties in certain (thermodynamic) conditions, obtained by the atomistic simulations .
 
-##### Table of Contents  
+# Table of Contents  
 [Scope of application](#Scope-of-application)  
-[Emphasis](#emphasis)  
+[Exemplary Competency Question](#Exemplary-CQ)
+[Ontology Schema](#Ontology-Schema)
+[SPARQL queries for Competency Question answering](#SPARQL-queries-for-Competency-Question-answering)
+[Contact](#Contact)
 
 # Scope of application
 ## Properties
@@ -35,7 +38,7 @@ Periodic materials
     o Metal-based solid solutions (mixtures with average formula Ta<sub>2.5</sub>V<sub>3.2</sub>Cr<sub>4.1</sub>, not exactly repeated) (for future)
       
 # Exemplary CQ:
-# Is there any simulation result showing Bulk Modulus (B) of Nb at Temperature=300K and Pressure=0 atm? 
+## Is there any simulation result showing Bulk Modulus (B) of Nb at Temperature=300K and Pressure=0 atm? 
 
 property = {Bulk Modulus}
 material = {Niobium (Nb)}
@@ -78,7 +81,7 @@ See example for bulk modulus:
 And for heat expansion:
 ![Screenshot 2024-09-23 095321](https://github.com/user-attachments/assets/0c38db30-c533-43ab-849f-c1e9e19d0ba2)
 
-# SPARQL queries
+# SPARQL queries for Competency Question answering
 
 These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources:
 
@@ -136,4 +139,9 @@ FILTER (?lvalue>=0 && ?uvalue<=500 && ?vpoints>=3)
 }
 
 # Contact
-[Dr. Konstantin Gubaev](https://www.fiz-karlsruhe.de/en/forschung/lebenslauf-und-publikationen-dr-kostiantyn-hubaiev)
+
+[Dr. Konstantin Gubaev]
+
+ORCID ID: https://orcid.org/0000-0003-2612-8515
+work e-mail: kostiantyn.hubaiev@fiz-karlsruhe.de
+personal e-mail: yamir4eg@gmail.com
