@@ -5,7 +5,9 @@ This ontology describes the material properties, obtained by the atomistic simul
 Static, equilibrium, bulk:
   - Thermal properties, e.g., formation energy, heat capacity
   - Mechanical properties, e.g., elastic moduli, thermal expansion
+    
    excluding:
+
   - Charge-related properties, e.g., polarization
   - Electron properties, e.g., HOMO/LUMO
   - Magnetic, Optic properties
