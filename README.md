@@ -9,7 +9,7 @@ This ontology describes the material properties in certain (thermodynamic) condi
 
 [SPARQL queries for Competency Question answering](#SPARQL-queries-for-Competency-Question-answering)
 
-[Connection between different data sources][#Exemplary-data-sources-connection]
+[Connection between different data sources](#Exemplary-data-sources-connection)
 
 [Contact](#Contact)
 
