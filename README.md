@@ -41,8 +41,9 @@ Answer to this CQ see below in SPARQL section.
 
 # Ontology schema
 
-The ontology is designed in blocks. First block is a PMD core based physical experiment. Dashed properties are not used and are added for illustration purposes.
+The ontology is designed in blocks. First block is a PMD core based physical experiment. Dashed properties are not used and are added for illustration purposes. The attached legend is valid for all provided figures.
 
+![exper](https://github.com/user-attachments/assets/4680c33a-718b-4503-afc2-b845e76a1ebb)
 
 Next block is simulation process, which involves input and output as information content entities simulating the physical material and its properties (both qualities and dispositions from BFO-2020 perspective). Each simulation process takes one set of input parameters and provides one output value (of the corresponding property).
 
@@ -59,6 +60,7 @@ Scalar value specification tells us that certain quantity has measure and unit:
 ![Screenshot 2024-09-23 095559](https://github.com/user-attachments/assets/66c2472a-0562-44d7-b76f-301b25af4bc6)
 
 Definitions of simulated entities (subclass of IAO:data item)
+
 ![Screenshot 2024-09-23 095456](https://github.com/user-attachments/assets/c64ba0b3-a8cb-417d-b6fa-cb91cdb63201)
 
 Parametric dimension explains ranges of parameters involved in simulations (corresponding to thermodynamic conditions), And allows for calculating the intersections :
@@ -72,6 +74,62 @@ See example for bulk modulus:
 And for heat expansion:
 ![Screenshot 2024-09-23 095321](https://github.com/user-attachments/assets/0c38db30-c533-43ab-849f-c1e9e19d0ba2)
 
+# SPARQL queries
+
+These queries can be executed over the provided ontology, after downloading the files and launching the HermiT reasoner. They show how a single property (bulk modulus) can be obtained from two different simulations. This is an exaple of semantic linking of different data sources:
+
+![Uploading TOTAL0.png…]()
+
+1. First query asks for a simulation plan directly providing bulk modulus for a temperature between 0K and 500K:
+   
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX pmd:<https://w3id.org/pmd/co/>
+PREFIX obo:<http://purl.obolibrary.org/obo/>
+
+SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit
+WHERE {
+?plan a pmd:SimulationPlan.
+?plan pmd:hasOutputDisposition ?resvalue.
+?resvalue a pmd:SimulatedBulkModulus.
+?plan pmd:hasInputParameterSpace ?ispace.
+?ispace pmd:hasDimension ?interval.
+?interval a pmd:TemperatureDimension.
+?interval pmd:hasLowerBoundary ?lbound.
+?interval pmd:hasUpperBoundary ?ubound.
+?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .
+?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .
+?lbound obo:IAO_0000039 ?unit
+FILTER (?lvalue>=0 && ?uvalue<=500)
+}
+
+2. Second query asks for a simulation plan providing free energy values for >=3 different volume values and for 0K-500K temperature range, which allows for calculating bulk modulus via 2nd derivative relation.
+
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX pmd:<https://w3id.org/pmd/co/>
+PREFIX obo:<http://purl.obolibrary.org/obo/>
+
+SELECT ?plan ?resvalue ?lvalue ?uvalue ?unit
+WHERE {
+?plan a pmd:SimulationPlan.
+?plan pmd:hasOutputDisposition ?resvalue.
+?resvalue a pmd:ZeroDerivativeOfEnergy.
+?plan pmd:hasInputParameterSpace ?ispace.
+?ispace pmd:hasDimension ?intervalT.
+?intervalT a pmd:TemperatureDimension.
+?intervalT pmd:hasLowerBoundary ?lbound.
+?intervalT pmd:hasUpperBoundary ?ubound.
+?lbound <http://purl.obolibrary.org/obo/OBI_0001937> ?lvalue .
+?ubound <http://purl.obolibrary.org/obo/OBI_0001937> ?uvalue .
+?lbound obo:IAO_0000039 ?unit.
+?ispace pmd:hasDimension ?intervalV.
+?intervalV a pmd:VolumeDimension.
+?intervalV pmd:hasNumberOfPoints ?vpoints
+FILTER (?lvalue>=0 && ?uvalue<=500 && ?vpoints>=3)
+}
 
 # Contact
 [Dr. Konstantin Gubaev](https://www.fiz-karlsruhe.de/en/forschung/lebenslauf-und-publikationen-dr-kostiantyn-hubaiev)
