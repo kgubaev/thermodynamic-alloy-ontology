@@ -11,7 +11,7 @@ This ontology describes the material properties in certain (thermodynamic) condi
 
 [Connection between different data sources](#Exemplary-data-sources-connection)
 
-[Contact](#C-ontact)
+[Contact](#Contact)
 
 # Scope of application
 ## Properties
@@ -159,7 +159,7 @@ Hereby three different data sources (from left to right) are connected via deriv
  
 ![TOTAL0](https://github.com/user-attachments/assets/5254cfb5-1ee6-4522-bcf1-ac9c3168af98)
 
-# C-ontact
+# Contact
 
 Dr. Konstantin Gubaev (Kostiantyn Hubaiev)
 
