@@ -1,7 +1,7 @@
 This ontology describes the material properties in certain (thermodynamic) conditions, obtained by the atomistic simulations .
 
 # Table of Contents  
-[Scope of application](#Scope-of-application)  
+[Scope of application](#Scope-of-application):    xxx
 
 [Exemplary Competency Question](#Exemplary-CQ)
 
