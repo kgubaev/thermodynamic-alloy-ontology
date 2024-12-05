@@ -11,7 +11,7 @@ This ontology describes the material properties in certain (thermodynamic) condi
 
 [Connection between different data sources](#Exemplary-data-sources-connection)
 
-[Contact](#C-ontact)
+[Contact](#C---ontact)
 
 # Scope of application
 ## Properties
